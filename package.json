@@ -3,10 +3,11 @@
     "version": "1.0.0",
     "description": "Angular frontend application with Jest and Cypress configured for testing.",
     "scripts": {
-        "start": "ng serve",
-        "test": "jest",
-        "e2e": "cypress open",
-        "build": "ng build --configuration=$NODE_ENV"
+    "start": "ng serve",
+    "test": "jest --runInBand",
+    "e2e": "cypress open",
+    "build": "ng build",
+    "lint": "ng lint"
     },
     "engines": {
         "node": "20.*",
@@ -32,9 +33,9 @@
         "@types/jest": "^29.5.0",
         "@types/node": "^20.0.0",
         "cypress": "^13.0.0",
-    "jest": "^30.0.0",
-    "jest-preset-angular": "15.0.1",
-    "ts-jest": "^29.1.0",
-    "typescript": ">=5.5.0"
+        "jest": "^30.0.0",
+        "jest-preset-angular": "15.0.1",
+        "ts-jest": "^29.1.0",
+        "typescript": ">=5.5.0"
     }
 }
