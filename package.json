@@ -3,11 +3,11 @@
     "version": "1.0.0",
     "description": "Angular frontend application with Jest and Cypress configured for testing.",
     "scripts": {
-    "start": "ng serve",
-    "test": "jest --runInBand",
-    "e2e": "cypress open",
-    "build": "ng build",
-    "lint": "ng lint"
+        "start": "ng serve",
+        "test": "jest --runInBand",
+        "e2e": "cypress open",
+        "build": "ng build",
+        "lint": "ng lint"
     },
     "engines": {
         "node": "20.*",
@@ -28,11 +28,19 @@
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^19.0.0",
+        "@angular-eslint/builder": "^20.3.0",
+        "@angular-eslint/eslint-plugin": "^20.3.0",
+        "@angular-eslint/eslint-plugin-template": "^20.3.0",
+        "@angular-eslint/schematics": "^20.3.0",
+        "@angular-eslint/template-parser": "^20.3.0",
         "@angular/cli": "^19.0.0",
         "@angular/compiler-cli": "^19.0.0",
         "@types/jest": "^29.5.0",
         "@types/node": "^20.0.0",
+        "@typescript-eslint/parser": "^8.44.1",
+        "@typescript-eslint/utils": "^8.44.1",
         "cypress": "^13.0.0",
+        "eslint": "^9.36.0",
         "jest": "^30.0.0",
         "jest-preset-angular": "15.0.1",
         "ts-jest": "^29.1.0",
