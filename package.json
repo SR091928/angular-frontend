@@ -42,7 +42,8 @@
         "cypress": "^13.0.0",
         "eslint": "^9.36.0",
         "jest": "^30.0.0",
-        "jest-preset-angular": "15.0.1",
+        "jest-environment-jsdom": "^30.1.2",
+        "jest-preset-angular": "^15.0.1",
         "ts-jest": "^29.1.0",
         "typescript": ">=5.5.0"
     }
