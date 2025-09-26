@@ -23,7 +23,7 @@ We use Nx for task running, caching, and modern development workflows, while kee
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 20
 - npm (or pnpm / yarn)
 - Nx CLI (optional, but useful):
 
