@@ -33,7 +33,6 @@ lib-cov
 .eslintcache
 
 
-.nx/cache
-.nx/workspace-data
+.nx
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
