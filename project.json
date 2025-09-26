@@ -1,0 +1,79 @@
+{
+  "name": "angular-frontend",
+  "projectType": "application",
+  "sourceRoot": "src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "development",
+      "options": {
+        "outputPath": "dist/angular-frontend",
+        "index": "src/index.html",
+        "main": "src/main.ts",
+        "polyfills": "src/polyfills.ts",
+        "tsConfig": "tsconfig.app.json",
+        "assets": ["src/favicon.ico", "src/assets"],
+        "styles": ["src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "namedChunks": true
+        },
+        "production": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "angular-frontend:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "angular-frontend:build:development"
+        },
+        "production": {
+          "buildTarget": "angular-frontend:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/unit-test-reports"],
+      "defaultConfiguration": "development",
+      "options": {
+        "jestConfig": "jest.config.ts",
+        "setupFilesAfterEnv": ["<rootDir>/src/test-setup.ts"],
+        "passWithNoTests": true,
+        "coverage": true,
+        "coverageReporters": ["html", "text", "lcov"],
+        "coverageDirectory": "coverage/unit-test-reports"
+      },
+      "configurations": {
+        "development": {
+          "codeCoverage": true
+        },
+        "production": {
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}
