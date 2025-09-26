@@ -5,7 +5,11 @@
     "default": {
       "runner": "nx/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test"
+        ],
         "parallel": 3
       }
     }
@@ -13,15 +17,22 @@
   "targetDefaults": {
     "build": {
       "defaultConfiguration": "development",
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "serve": {
       "defaultConfiguration": "development"
     },
     "test": {
       "defaultConfiguration": "development",
-      "outputs": ["{workspaceRoot}/coverage"]
+      "outputs": [
+        "{workspaceRoot}/coverage"
+      ]
     },
     "lint": {
       "cache": true,
@@ -43,5 +54,6 @@
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/eslint.config.cjs"
     ]
-  }
+  },
+  "nxCloudId": "68d6949e07bcfce498fe4f64"
 }
