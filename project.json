@@ -36,14 +36,14 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "browserTarget": "angular-frontend:build"
+        "buildTarget": "angular-frontend:build"
       },
       "configurations": {
         "development": {
-          "browserTarget": "angular-frontend:build:development"
+          "buildTarget": "angular-frontend:build:development"
         },
         "production": {
-          "browserTarget": "angular-frontend:build:production"
+          "buildTarget": "angular-frontend:build:production"
         }
       }
     },
