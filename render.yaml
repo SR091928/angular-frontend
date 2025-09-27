@@ -1,21 +1,21 @@
 services:
   - type: web
-    name: shankar0919-angular-frontend-eng
-    branch: master
+    name: shankar-angular-frontend-eng
+    branch: Eng
     runtime: static
     buildCommand: npm install && npx nx build angular-frontend --configuration=eng
-    staticPublishPath: dist/angular-frontend
+    staticPublishPath: dist/angular-frontend/build-eng
 
   - type: web
-    name: shankar0919-angular-frontend-test
-    branch: master
+    name: shankar-angular-frontend-test
+    branch: Test
     runtime: static
     buildCommand: npm install && npx nx build angular-frontend --configuration=test
-    staticPublishPath: dist/angular-frontend
+    staticPublishPath: dist/angular-frontend/build-test
 
   - type: web
-    name: shankar0919-angular-frontend-prod
-    branch: master
+    name: shankar-angular-frontend-prod
+    branch: Prod
     runtime: static
     buildCommand: npm install && npx nx build angular-frontend --configuration=production
-    staticPublishPath: dist/angular-frontend
+    staticPublishPath: dist/angular-frontend/build-prod
