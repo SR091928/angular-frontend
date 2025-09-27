@@ -4,7 +4,10 @@
   "description": "Angular frontend application with Jest and Cypress configured for testing.",
   "scripts": {
     "start": "nx serve",
-    "build": "nx build",
+    "build:local": "nx serve angular-frontend",
+    "build:eng": "nx serve angular-frontend --configuration=eng",
+    "build:test": "nx serve angular-frontend --configuration=test",
+    "build:prod": "nx serve angular-frontend --configuration=production",
     "test": "nx test --coverage",
     "lint": "nx lint",
     "coverage": "nx test --coverage --watch=true"

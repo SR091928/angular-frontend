@@ -16,6 +16,7 @@ We use Nx for task running, caching, and modern development workflows, while kee
 - [Test](#test)
 - [⚡ Nx Features in Use](#-nx-features-in-use)
 - [🛠️ CI/CD (GitHub Actions)](#️-cicd-github-actions)
+- [🌍 Environments](#-environments)
 
 ---
 
@@ -138,3 +139,26 @@ You can find the workflow at:
 ```txt
 .github/workflows/ci.yml
 ```
+
+---
+
+## 🌍 Environments
+
+We use multiple environment configurations (`src/environments/`) to target different backends:
+
+| Environment | File                              | Build Command |
+|-------------|-----------------------------------|---------------|
+| Local       | `environment.local.ts`            | `nx serve angular-frontend --configuration=development` |
+| ENG         | `environment.eng.ts`              | `nx serve angular-frontend --configuration=eng` |
+| Test        | `environment.test.ts`             | `nx serve angular-frontend --configuration=test` |
+| Production  | `environment.prod.ts`             | `nx serve angular-frontend --configuration=production` |
+| Default     | `environment.ts` (alias to local) | used implicitly if no config given |
+
+### Example API URLs
+
+- **Local** → `http://localhost:3000`
+- **ENG** → `https://eng-api.myapp.com`
+- **Test** → `https://test-api.myapp.com`
+- **Production** → `https://api.myapp.com`
+
+---
