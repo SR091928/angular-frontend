@@ -1,18 +1,21 @@
 services:
-  - type: static_site
+  - type: web
     name: angular-frontend-eng
     branch: master
+    runtime: static
     buildCommand: npm install && npx nx build angular-frontend --configuration=eng
     staticPublishPath: dist/angular-frontend
 
-  - type: static_site
+  - type: web
     name: angular-frontend-test
     branch: master
+    runtime: static
     buildCommand: npm install && npx nx build angular-frontend --configuration=test
     staticPublishPath: dist/angular-frontend
 
-  - type: static_site
+  - type: web
     name: angular-frontend-prod
     branch: master
+    runtime: static
     buildCommand: npm install && npx nx build angular-frontend --configuration=production
     staticPublishPath: dist/angular-frontend
