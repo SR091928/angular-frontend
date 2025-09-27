@@ -36,7 +36,6 @@
           "outputHashing": "all",
           "sourceMap": false,
           "namedChunks": false,
-          "outputPath": "dist/angular-frontend/build-prod",
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
@@ -48,7 +47,6 @@
           "optimization": false,
           "sourceMap": true,
           "namedChunks": true,
-          "outputPath": "dist/angular-frontend/build-eng",
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
@@ -60,7 +58,6 @@
           "optimization": true,
           "sourceMap": false,
           "namedChunks": false,
-          "outputPath": "dist/angular-frontend/build-test",
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
