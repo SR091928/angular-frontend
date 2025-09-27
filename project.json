@@ -23,7 +23,6 @@
           "optimization": false,
           "sourceMap": true,
           "namedChunks": true,
-          "outputPath": "dist/angular-frontend/build-local",
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
