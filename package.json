@@ -8,9 +8,9 @@
     "build:eng": "nx serve angular-frontend --configuration=eng",
     "build:test": "nx serve angular-frontend --configuration=test",
     "build:prod": "nx serve angular-frontend --configuration=production",
-    "test": "nx test --coverage",
+    "test": "nx test",
     "lint": "nx lint",
-    "coverage": "nx test --coverage --watch=true"
+    "test:coverage": "nx test --coverage --watch=true"
   },
   "engines": {
     "node": "20.*",
