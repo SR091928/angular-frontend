@@ -156,9 +156,9 @@ We use multiple environment configurations (`src/environments/`) to target diffe
 
 ### Example API URLs
 
-- **Local** → `http://localhost:3000`
-- **ENG** → `https://eng-api.myapp.com`
-- **Test** → `https://test-api.myapp.com`
-- **Production** → `https://api.myapp.com`
+- **Local**: [http://localhost:3000](http://localhost:3000)
+- **Eng**: [https://shankar-angular-frontend-eng.onrender.com](https://shankar-angular-frontend-eng.onrender.com)  
+- **Test**: [https://shankar-angular-frontend-test.onrender.com](https://shankar-angular-frontend-test.onrender.com)  
+- **Prod**: [https://shankar-angular-frontend-prod.onrender.com](https://shankar-angular-frontend-prod.onrender.com)  
 
 ---
