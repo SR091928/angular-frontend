@@ -1,164 +1,87 @@
-# Angular Frontend (Nx Standalone)
+# Angular Frontend
 
-This is a standalone Angular application powered by [Nx](https://nx.dev).  
-We use Nx for task running, caching, and modern development workflows, while keeping a **single Angular app** (not a monorepo).
+![Node.js](https://img.shields.io/badge/node-%20v20-green)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+
+This is the frontend application for the NodeJS and Python backend projects.  
+It is built with [Angular](https://angular.io/), follows a modular architecture, and is designed to work seamlessly with the backend services deployed on Render.
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-- [🚀 Getting Started](#-getting-started)
-- [Prerequisites](#prerequisites)
-- [Install dependencies](#install-dependencies)
-- [Development server](#development-server)
-- [Build](#build)
-- [Lint](#lint)
-- [Test](#test)
-- [⚡ Nx Features in Use](#-nx-features-in-use)
-- [🛠️ CI/CD (GitHub Actions)](#️-cicd-github-actions)
-- [🌍 Environments](#-environments)
+- [Overview](-#overview)
+- [Getting Started](-#getting-started)
+- [Scripts](-#scripts)
+- [Commit Guidelines](-#commit-guidelines)
+- [Environments](-#environments)
+
+---
+
+## 📌 Overview
+
+This repository contains the **Angular frontend** for the project.  
+It communicates with the [NodeJS backend](https://github.com/Shankar0919/nodejs-backend) and [Python backend](https://github.com/Shankar0919/python-backend).
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
-
-- Node.js 20
-- npm (or pnpm / yarn)
-- Nx CLI (optional, but useful):
-
-  ```bash
-  npm install -g nx
-  ```
-
----
-
-### Install dependencies
+### Installation
 
 ```bash
-npm ci
+git clone <repo-url>
+cd angular-frontend
+npm install
 ```
 
----
-
-### Development server
-
-Start the app in development mode:
+### Running the App
 
 ```bash
 npm start
-# or
-nx serve
 ```
 
-App runs at [http://localhost:4200](http://localhost:4200).
+The app will be available at `http://localhost:4200` when you run in local.
 
 ---
 
-### Build
+## 📜 Scripts
 
-Build the Angular app (default = development):
-
-```bash
-npm run build
-# or
-nx build
-```
-
-For production:
-
-```bash
-nx build --configuration=production
-```
+| Command         | Description                    |
+|------------------|--------------------------------|
+| `npm run start`  | Run the server                 |
+| `npm run build`  | Build for development          |
+| `npm run test`   | Run unit tests                 |
+| `npm run lint`   | Run ESLint checks              |
 
 ---
 
-### Lint
+## Commit Guidelines
 
-Run ESLint:
+- Do **not** commit directly to `master`.  
+- Create a feature branch:  
 
-```bash
-npm run lint
-# or
-nx lint
-```
+  ```bash
+  git checkout -b feature/my-change
+  ```
 
----
+- Commit with meaningful messages:  
 
-### Test
+  ```bash
+  git commit -m "feat(ui): add new dashboard component"
+  ```
 
-Run unit tests with [Jest](https://jestjs.io/):
-
-```bash
-npm test
-# or
-nx test
-```
-
-Jest is configured to:
-
-- Run tests in `*.spec.ts` files
-- Enforce **80% minimum coverage**
-- Collect coverage **only for components and services** (`src/app/**/*.component.ts` and `src/app/**/*.service.ts`)
-
-Coverage reports are generated in:
-
-```text
-coverage/angular-frontend/
-```
-
-Open `index.html` inside that folder to view the detailed report.
-
----
-
-## ⚡ Nx Features in Use
-
-- **Standalone mode**: single Angular app, no monorepo structure
-- **`project.json`**: project configuration instead of `angular.json`
-- **Task runner & caching**: faster builds and tests
-- **Jest**: modern testing framework with coverage enforcement
-- **ESLint**: linting with Nx integration
-
----
-
-## 🛠️ CI/CD (GitHub Actions)
-
-We use **GitHub Actions** for continuous integration.  
-
-On **all branches** (push + PR), the workflow runs the following **in parallel**:
-
-- `lint`
-- `build`
-- `test`
-
-Each job installs dependencies in isolation using `npm ci`.
-
-You can find the workflow at:
-
-```txt
-.github/workflows/ci.yml
-```
+- Push and open a Pull Request for review.  
 
 ---
 
 ## 🌍 Environments
 
-We use multiple environment configurations (`src/environments/`) to target different backends:
+The application is deployed on [Render](https://render.com) across three environments:
 
-| Environment | File                              | Build Command |
-|-------------|-----------------------------------|---------------|
-| Local       | `environment.local.ts`            | `nx serve angular-frontend --configuration=development` |
-| ENG         | `environment.eng.ts`              | `nx serve angular-frontend --configuration=eng` |
-| Test        | `environment.test.ts`             | `nx serve angular-frontend --configuration=test` |
-| Production  | `environment.prod.ts`             | `nx serve angular-frontend --configuration=production` |
-| Default     | `environment.ts` (alias to local) | used implicitly if no config given |
-
-### Example API URLs
-
-- **Local**: [http://localhost:3000](http://localhost:3000)
-- **Eng**: [https://shankar-angular-frontend-eng.onrender.com](https://shankar-angular-frontend-eng.onrender.com)  
-- **Test**: [https://shankar-angular-frontend-test.onrender.com](https://shankar-angular-frontend-test.onrender.com)  
-- **Prod**: [https://shankar-angular-frontend-prod.onrender.com](https://shankar-angular-frontend-prod.onrender.com)  
-
----
+| Environment | Angular UI URL                                       | NodeJS API URL                                     | Python API URL |
+|-------------|------------------------------------------------------|----------------------------------------------------|----------------|
+| Eng         | <https://shankar-angular-frontend-eng.onrender.com/> | <https://shankar-nodejs-backend-eng.onrender.com/> | _TBD_          |
+| Test        | <https://shankar-angular-frontend-test.onrender.com/>| <https://shankar-nodejs-backend-test.onrender.com/>| _TBD_          |
+| Prod        | <https://shankar-angular-frontend-prod.onrender.com/>| <https://shankar-nodejs-backend-prod.onrender.com/>| _TBD_          |
