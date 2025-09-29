@@ -84,7 +84,6 @@ The application is deployed on [Render](https://render.com) across three environ
 | Environment | Angular UI URL                                       | NodeJS API URL                                     | Python API URL |
 |-------------|------------------------------------------------------|----------------------------------------------------|----------------|
 | Eng         | <https://shankar-angular-frontend-eng.onrender.com/> | <https://shankar-nodejs-backend-eng.onrender.com/> | _TBD_          |
-| Test        | <https://shankar-angular-frontend-test.onrender.com/>| <https://shankar-nodejs-backend-test.onrender.com/>| _TBD_          |
 | Prod        | <https://shankar-angular-frontend-prod.onrender.com/>| <https://shankar-nodejs-backend-prod.onrender.com/>| _TBD_          |
 
 ---
