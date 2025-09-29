@@ -11,11 +11,12 @@ It is built with [Angular](https://angular.io/), follows a modular architecture,
 
 ## Table of Contents
 
-- [Overview](-#overview)
-- [Getting Started](-#getting-started)
-- [Scripts](-#scripts)
-- [Commit Guidelines](-#commit-guidelines)
-- [Environments](-#environments)
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+- [Scripts](#scripts)
+- [Commit Guidelines](#commit-guidelines)
+- [Environments](#environments)
+- [Architecture](#architecture)
 
 ---
 
@@ -85,3 +86,10 @@ The application is deployed on [Render](https://render.com) across three environ
 | Eng         | <https://shankar-angular-frontend-eng.onrender.com/> | <https://shankar-nodejs-backend-eng.onrender.com/> | _TBD_          |
 | Test        | <https://shankar-angular-frontend-test.onrender.com/>| <https://shankar-nodejs-backend-test.onrender.com/>| _TBD_          |
 | Prod        | <https://shankar-angular-frontend-prod.onrender.com/>| <https://shankar-nodejs-backend-prod.onrender.com/>| _TBD_          |
+
+---
+
+## Architecture
+![Architecture](./architecture.png)
+
+---

@@ -11,17 +11,6 @@ services:
         destination: /index.html
 
   - type: web
-    name: shankar-angular-frontend-test
-    branch: master
-    runtime: static
-    buildCommand: npm install && npx nx build angular-frontend --configuration=test
-    staticPublishPath: dist/angular-frontend
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-
-  - type: web
     name: shankar-angular-frontend-prod
     branch: master
     runtime: static

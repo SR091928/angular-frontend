@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: ''
+  apiUrl: 'https://shankar-nodejs-backend-eng.onrender.com'
 };

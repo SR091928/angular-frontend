@@ -26,7 +26,7 @@
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
-              "with": "src/environments/environment.local.ts"
+              "with": "src/environments/environment.eng.ts"
             }
           ]
         },
@@ -52,17 +52,6 @@
               "with": "src/environments/environment.eng.ts"
             }
           ]
-        },
-        "test": {
-          "optimization": true,
-          "sourceMap": false,
-          "namedChunks": false,
-          "fileReplacements": [
-            {
-              "replace": "src/environments/environment.ts",
-              "with": "src/environments/environment.test.ts"
-            }
-          ]
         }
       }
     },
@@ -81,9 +70,6 @@
         },
         "eng": {
           "buildTarget": "angular-frontend:build:eng"
-        },
-        "test": {
-          "buildTarget": "angular-frontend:build:test"
         }
       }
     },
