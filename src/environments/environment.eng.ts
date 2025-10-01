@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://shankar-nodejs-backend-eng.onrender.com'
+  nodeApi: 'https://shankar-nodejs-backend-eng.onrender.com',
+  pythonApi: 'https://python-backend-eng.onrender.com/'
 };

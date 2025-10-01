@@ -49,31 +49,31 @@ The app will be available at `http://localhost:4200` when you run in local.
 
 ## 📜 Scripts
 
-| Command         | Description                    |
-|------------------|--------------------------------|
-| `npm run start`  | Run the server                 |
-| `npm run build`  | Build for development          |
-| `npm run test`   | Run unit tests                 |
-| `npm run lint`   | Run ESLint checks              |
+| Command         | Description           |
+| --------------- | --------------------- |
+| `npm run start` | Run the server        |
+| `npm run build` | Build for development |
+| `npm run test`  | Run unit tests        |
+| `npm run lint`  | Run ESLint checks     |
 
 ---
 
 ## Commit Guidelines
 
-- Do **not** commit directly to `master`.  
-- Create a feature branch:  
+- Do **not** commit directly to `master`.
+- Create a feature branch:
 
   ```bash
   git checkout -b feature/my-change
   ```
 
-- Commit with meaningful messages:  
+- Commit with meaningful messages:
 
   ```bash
   git commit -m "feat(ui): add new dashboard component"
   ```
 
-- Push and open a Pull Request for review.  
+- Push and open a Pull Request for review.
 
 ---
 
@@ -81,14 +81,15 @@ The app will be available at `http://localhost:4200` when you run in local.
 
 The application is deployed on [Render](https://render.com) across three environments:
 
-| Environment | Angular UI URL                                       | NodeJS API URL                                     | Python API URL |
-|-------------|------------------------------------------------------|----------------------------------------------------|----------------|
-| Eng         | <https://shankar-angular-frontend-eng.onrender.com/> | <https://shankar-nodejs-backend-eng.onrender.com/> | _TBD_          |
-| Prod        | <https://shankar-angular-frontend-prod.onrender.com/>| <https://shankar-nodejs-backend-prod.onrender.com/>| _TBD_          |
+| Environment | Angular UI URL                                        | NodeJS API URL                                      | Python API URL                              |
+| ----------- | ----------------------------------------------------- | --------------------------------------------------- | ------------------------------------------- |
+| Eng         | <https://shankar-angular-frontend-eng.onrender.com/>  | <https://shankar-nodejs-backend-eng.onrender.com/>  | <https://python-backend-eng.onrender.com/>  |
+| Prod        | <https://shankar-angular-frontend-prod.onrender.com/> | <https://shankar-nodejs-backend-prod.onrender.com/> | <https://python-backend-prod.onrender.com/> |
 
 ---
 
 ## Architecture
+
 ![Architecture](./architecture.png)
 
 ---

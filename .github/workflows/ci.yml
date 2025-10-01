@@ -1,4 +1,4 @@
-name: CI
+name: Build and Deploy Angular UI Application
 
 on:
   push:
@@ -6,53 +6,77 @@ on:
       - "**"
 
 jobs:
-  lint:
+  CI-Build-Lint-Test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npx nx build angular-frontend
+      
+      - name: Lint
+        run: npx nx lint angular-frontend
+
+      - name: Unit Tests
+        run: npx nx test angular-frontend --ci --code-coverage
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: CI-Build-Lint-Test
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run lint
-        run: npm run lint
+      - name: Build ENG
+        run: npx nx build angular-frontend --configuration eng
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Deploy ENG
+        run: |
+          rm -rf /tmp/angular-ui-eng
+          git clone --depth=1 https://${{ github.actor }}:${{ secrets.DEPLOY_SECRET }}@github.com/nbshankar/nbshankar-angular-ui-eng.github.io.git /tmp/angular-ui-eng
+          rm -rf /tmp/angular-ui-eng/*
+          cp -r dist/eng/* /tmp/angular-ui-eng/
+          cd /tmp/angular-ui-eng
+          git add .
+          git commit -m "Deploy ENG build $(date)" || echo "No ENG changes"
+          git push origin master
+          cd -
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      # --- PROD Build & Deploy ---
+      - name: Build PROD
+        run: npx nx build angular-frontend --configuration production
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Deploy PROD
+        run: |
+          rm -rf /tmp/angular-ui-prod
+          git clone --depth=1 https://${{ github.actor }}:${{ secrets.DEPLOY_SECRET }}@github.com/nbshankar/nbshankar-angular-ui-prod.github.io.git /tmp/angular-ui-prod
+          rm -rf /tmp/angular-ui-prod/*
+          cp -r dist/prod/* /tmp/angular-ui-prod/
+          cd /tmp/angular-ui-prod
+          git add .
+          git commit -m "Deploy PROD build $(date)" || echo "No PROD changes"
+          git push origin master
+          cd -
 
-      - name: Build Angular app
-        run: npm run build
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run tests
-        run: npm run test
+      - name: Show URLs
+        run: |
+          echo "✅ ENG deployed:  https://nbshankar-angular-ui-eng.github.io/"
+          echo "✅ PROD deployed: https://nbshankar-angular-ui-prod.github.io/"
