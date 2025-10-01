@@ -3,31 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>Redirecting...</title>
-    <script type="text/javascript">
-      (function () {
-        // If redirect path was saved earlier, restore it
-        var redirect = sessionStorage.getItem("redirect");
-        if (redirect) {
-          sessionStorage.removeItem("redirect");
-          history.replaceState(null, null, redirect);
-        }
-      })();
-    </script>
   </head>
   <body>
     <script type="text/javascript">
-      // Save the current path so Angular can restore it after reload
+      var redirect = sessionStorage.getItem("redirect");
+      if (redirect) {
+        sessionStorage.removeItem("redirect");
+        history.replaceState(null, null, redirect);
+      }
       sessionStorage.setItem(
         "redirect",
         location.pathname + location.search + location.hash
       );
-
-      // Detect <base href="..."> from the Angular app (ENG/PROD)
-      var base =
-        (document.querySelector("base") && document.querySelector("base").getAttribute("href")) || "/";
-
-      // Always redirect back to app base (works for ENG and PROD)
-      window.location.href = base;
+      // Extract the repo name from the pathname
+      var repo = window.location.pathname.split('/')[1];
+      window.location.href = '/' + repo + '/';
     </script>
   </body>
 </html>
