@@ -14,7 +14,7 @@
       console.log("repo:", repo);
       console.log("base:", base);
 
-      if (!window.location.pathname.startsWith(base) || window.location.pathname === base) {
+      if (window.location.pathname !== base) {
         // Save current path for Angular to restore after reload
         sessionStorage.setItem(
           "redirect",
@@ -25,7 +25,6 @@
       } else {
         console.log("Already at base, not redirecting.");
       }
-      // If already at base, do nothing -- let Angular load and handle redirect from sessionStorage
     </script>
   </body>
 </html>
