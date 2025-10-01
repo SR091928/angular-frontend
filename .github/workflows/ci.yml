@@ -84,7 +84,7 @@ jobs:
       - name: Build ENG
         run: npx nx build angular-frontend --configuration eng
 
-      - name: Deploy ENG
+      - name: Deploy to ENG Pages
         run: |
           rm -rf /tmp/angular-ui-eng
           git clone --depth=1 https://${{ github.actor }}:${{ secrets.DEPLOY_SECRET }}@github.com/nbshankar/nbshankar-angular-ui-eng.github.io.git /tmp/angular-ui-eng
@@ -98,36 +98,36 @@ jobs:
           git push origin master
           cd -
 
-  deploy-prod:
-    needs: deploy-eng
-    name: Deploy App to PROD
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
+  # deploy-prod:
+  #   needs: deploy-eng
+  #   name: Deploy App to PROD
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/master'
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 20
 
-      - name: Install dependencies
-        run: npm ci
+  #     - name: Install dependencies
+  #       run: npm ci
 
-      - name: Build PROD
-        run: npx nx build angular-frontend --configuration production
+  #     - name: Build PROD
+  #       run: npx nx build angular-frontend --configuration production
 
-      - name: Deploy PROD
-        run: |
-          rm -rf /tmp/angular-ui-prod
-          git clone --depth=1 https://${{ github.actor }}:${{ secrets.DEPLOY_SECRET }}@github.com/nbshankar/nbshankar-angular-ui-prod.github.io.git /tmp/angular-ui-prod
-          rm -rf /tmp/angular-ui-prod/*
-          cp -r dist/prod/* /tmp/angular-ui-prod/
-          cd /tmp/angular-ui-prod
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Deploy PROD build $(date)" || echo "No PROD changes"
-          git push origin master
-          cd -
+  #     - name: Deploy PROD
+  #       run: |
+  #         rm -rf /tmp/angular-ui-prod
+  #         git clone --depth=1 https://${{ github.actor }}:${{ secrets.DEPLOY_SECRET }}@github.com/nbshankar/nbshankar-angular-ui-prod.github.io.git /tmp/angular-ui-prod
+  #         rm -rf /tmp/angular-ui-prod/*
+  #         cp -r dist/prod/* /tmp/angular-ui-prod/
+  #         cd /tmp/angular-ui-prod
+  #         git config user.name "github-actions[bot]"
+  #         git config user.email "github-actions[bot]@users.noreply.github.com"
+  #         git add .
+  #         git commit -m "Deploy PROD build $(date)" || echo "No PROD changes"
+  #         git push origin master
+  #         cd -
