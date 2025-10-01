@@ -91,6 +91,8 @@ jobs:
           rm -rf /tmp/angular-ui-eng/*
           cp -r dist/eng/* /tmp/angular-ui-eng/
           cd /tmp/angular-ui-eng
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Deploy ENG build $(date)" || echo "No ENG changes"
           git push origin master
@@ -123,6 +125,8 @@ jobs:
           rm -rf /tmp/angular-ui-prod/*
           cp -r dist/prod/* /tmp/angular-ui-prod/
           cd /tmp/angular-ui-prod
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Deploy PROD build $(date)" || echo "No PROD changes"
           git push origin master
