@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "Angular frontend application with Jest and Cypress configured for testing.",
   "scripts": {
-    "start": "nx serve",
     "build": "nx build angular-frontend",
-    "build:eng": "nx build angular-frontend --configuration=eng",
-    "build:prod": "nx build angular-frontend --configuration=production",
     "serve": "nx serve angular-frontend",
+    "build:eng": "rimraf dist/eng && nx build angular-frontend --configuration eng",
     "serve:eng": "nx serve angular-frontend --configuration=eng",
+    "build:prod": "rimraf dist/prod && nx build angular-frontend --configuration production",
     "serve:prod": "nx serve angular-frontend --configuration=production",
-    "test": "nx test",
-    "lint": "nx lint",
-    "test:coverage": "nx test --coverage --watch=true"
+    "test": "nx test angular-frontend",
+    "lint": "nx lint angular-frontend",
+    "test:coverage": "npm run test --coverage --watch=true",
+    "clean": "rimraf dist coverage"
   },
   "engines": {
     "node": "20.*",
@@ -59,6 +59,7 @@
     "jest-preset-angular": "^15.0.0",
     "nx": "21.5.3",
     "nx-cloud": "^19.1.0",
+    "rimraf": "^6.0.1",
     "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
