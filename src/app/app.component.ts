@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Check for a redirect path in sessionStorage (set by 404.html)
     const redirect = sessionStorage.getItem('redirect');
+    console.log("Debug App Component");
+    console.log("Redirect: ", redirect)
     if (redirect && redirect !== window.location.pathname) {
       sessionStorage.removeItem('redirect');
       this.router.navigateByUrl(redirect);
