@@ -6,16 +6,20 @@
   </head>
   <body>
     <script type="text/javascript">
-      sessionStorage.setItem(
-        "redirect",
-        location.pathname + location.search + location.hash
-      );
+      // Set your repo base
       var repo = window.location.pathname.split('/')[1];
       var base = '/' + repo + '/';
-      if (!window.location.pathname.startsWith(base)) {
+
+      // If we're NOT at the base, do the redirect logic
+      if (window.location.pathname !== base) {
+        // Save current path for Angular to restore after reload
+        sessionStorage.setItem(
+          "redirect",
+          location.pathname + location.search + location.hash
+        );
         window.location.href = base;
       }
-      // If already at base, let the Angular app handle the redirect from sessionStorage
+      // If we're already at the base, do nothing! Let Angular load.
     </script>
   </body>
 </html>
