@@ -44,7 +44,7 @@
             }
           ],
           "outputPath": "dist/prod",
-          "baseHref": "/"
+          "baseHref": "/angular-ui-prod.github.io/"
         },
         "eng": {
           "optimization": true,
