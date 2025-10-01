@@ -25,7 +25,6 @@ jobs:
         run: npx nx build angular-frontend
 
   lint:
-    needs: build
     name: Run Lint
     runs-on: ubuntu-latest
     steps:
@@ -44,7 +43,6 @@ jobs:
         run: npx nx lint angular-frontend
 
   test:
-    needs: lint
     name: Run Unit Tests with Coverage
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +61,7 @@ jobs:
         run: npx nx test angular-frontend --ci --code-coverage
 
   deploy-eng:
-    needs: test
+    needs: [build, lint, test]
     name: Deploy App to ENG
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
