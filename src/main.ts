@@ -7,8 +7,5 @@ import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    provideRouter(routes),
-    importProvidersFrom(ReactiveFormsModule)
-  ]
+  providers: [provideRouter(routes), importProvidersFrom(ReactiveFormsModule)]
 }).catch(err => console.error(err));
