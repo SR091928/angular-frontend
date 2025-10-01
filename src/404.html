@@ -6,18 +6,16 @@
   </head>
   <body>
     <script type="text/javascript">
-      var redirect = sessionStorage.getItem("redirect");
-      if (redirect) {
-        sessionStorage.removeItem("redirect");
-        history.replaceState(null, null, redirect);
-      }
-      sessionStorage.setItem(
-        "redirect",
-        location.pathname + location.search + location.hash
-      );
-      // Extract the repo name from the pathname
+
+      // Save the current path so Angular can restore it after reload
+      sessionStorage.setItem("redirect", location.pathname + location.search + location.hash);
+
+      // Extract the repo name from the pathname for project sites
       var repo = window.location.pathname.split('/')[1];
+      
+      // Redirect to the app's base path
       window.location.href = '/' + repo + '/';
+    
     </script>
   </body>
 </html>
