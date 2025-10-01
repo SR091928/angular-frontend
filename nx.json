@@ -1,19 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "defaultProject": "angular-frontend",
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test"
-        ],
-        "parallel": 3
-      }
-    }
-  },
   "targetDefaults": {
     "build": {
       "defaultConfiguration": "development",
@@ -54,6 +41,5 @@
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/eslint.config.cjs"
     ]
-  },
-  "nxCloudId": "68d6949e07bcfce498fe4f64"
+  }
 }
