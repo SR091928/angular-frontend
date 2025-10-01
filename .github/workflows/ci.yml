@@ -3,33 +3,13 @@ name: Build and Deploy Angular UI Application
 on:
   push:
     branches:
-      - "**"
+      - master
 
-# Restrict default permissions for all jobs
 permissions:
   contents: read
 
 jobs:
-  build:
-    name: Run Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: npm run build
-
-  lint:
-    name: Run Lint
+  CI-runs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -46,27 +26,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-  test:
-    name: Run Unit Tests with Coverage
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
       - name: Unit Tests
         run: npm run test
 
   deploy-eng:
-    needs: [build, lint, test]
-    name: Deploy App to ENG
+    needs: CI-runs
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
@@ -84,23 +48,16 @@ jobs:
       - name: Build ENG
         run: npm run build:eng
 
-      - name: Deploy to ENG Pages
-        run: |
-          rm -rf /tmp/angular-ui-eng
-          git clone --depth=1 https://${{ github.actor }}:${{ secrets.DEPLOY_SECRET }}@github.com/nbshankar/nbshankar-angular-ui-eng.github.io.git /tmp/angular-ui-eng
-          rm -rf /tmp/angular-ui-eng/*
-          cp -r dist/eng/* /tmp/angular-ui-eng/
-          cd /tmp/angular-ui-eng
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Deploy ENG build $(date)" || echo "No ENG changes"
-          git push origin master
-          cd -
+      - name: Deploy to ENG GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_SECRET }}
+          publish_dir: ./dist/eng
+          external_repository: nbshankar/nbshankar-angular-ui-eng.github.io
+          publish_branch: master
 
   deploy-prod:
     needs: deploy-eng
-    name: Deploy App to PROD
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
@@ -118,16 +75,10 @@ jobs:
       - name: Build PROD
         run: npm run build:prod
 
-      - name: Deploy PROD
-        run: |
-          rm -rf /tmp/angular-ui-prod
-          git clone --depth=1 https://${{ github.actor }}:${{ secrets.DEPLOY_SECRET }}@github.com/nbshankar/nbshankar-angular-ui-prod.github.io.git /tmp/angular-ui-prod
-          rm -rf /tmp/angular-ui-prod/*
-          cp -r dist/prod/* /tmp/angular-ui-prod/
-          cd /tmp/angular-ui-prod
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Deploy PROD build $(date)" || echo "No PROD changes"
-          git push origin master
-          cd -
+      - name: Deploy to PROD GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_SECRET }}
+          publish_dir: ./dist/prod
+          external_repository: nbshankar/nbshankar-angular-ui-prod.github.io
+          publish_branch: master
