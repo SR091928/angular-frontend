@@ -8,16 +8,6 @@
 ![Nx](https://img.shields.io/badge/Nx-17-blue)
 ![Nx%20Cloud](https://img.shields.io/badge/Nx--Cloud-enabled-yellow)
 
-
-
-## 🚦 GitHub CI/CD Status
-
-![Build](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=build)
-![Lint](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=lint)
-![Unit-Test](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=test)
-![Deploy-ENG](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=deploy-eng)
-![Deploy-PROD](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=deploy-prod)
-
 ---
 
 ## 🌐 Application URLs
