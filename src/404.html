@@ -10,18 +10,17 @@
       var base = '/' + repo + '/';
 
       console.log("404.html debug:");
-      console.log("current pathname:", window.location.pathname);
+      console.log("pathname:", window.location.pathname);
       console.log("repo:", repo);
-      // console.log("base:", base);
+      console.log("base:", base);
 
       // if (window.location.pathname !== base) {
       //   // Save current path for Angular to restore after reload
         sessionStorage.setItem(
           "redirect",
-          location.pathname
+          window.location.pathname
         );
-        console.log("Redirecting to:", base);
-        window.location.href = window.location.pathname;
+        // window.location.href = window.location.pathname;
       // } else {
       //   console.log("Already at base, not redirecting.");
       // }
