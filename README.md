@@ -1,95 +1,141 @@
 # Angular Frontend
 
-![Node.js](https://img.shields.io/badge/node-%20v20-green)
-![Build](https://img.shields.io/badge/build-passing-brightgreen)
-![Tests](https://img.shields.io/badge/tests-passing-brightgreen)
+## 📦 Application Tools
 
-This is the frontend application for the NodeJS and Python backend projects.  
-It is built with [Angular](https://angular.io/), follows a modular architecture, and is designed to work seamlessly with the backend services deployed on Render.
+![Angular](https://img.shields.io/badge/Angular-17-red)
+![Node.js](https://img.shields.io/badge/Node.js-20-green)
+![Jest](https://img.shields.io/badge/Jest-29-brightgreen)
+![Nx](https://img.shields.io/badge/Nx-17-blue)
+![Nx%20Cloud](https://img.shields.io/badge/Nx--Cloud-enabled-yellow)
 
----
 
-## Table of Contents
 
-- [Overview](#overview)
-- [Getting Started](#getting-started)
-- [Scripts](#scripts)
-- [Commit Guidelines](#commit-guidelines)
-- [Environments](#environments)
-- [Architecture](#architecture)
+## 🚦 GitHub CI/CD Status
 
----
-
-## 📌 Overview
-
-This repository contains the **Angular frontend** for the project.  
-It communicates with the [NodeJS backend](https://github.com/Shankar0919/nodejs-backend) and [Python backend](https://github.com/Shankar0919/python-backend).
+![Build](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=build)
+![Lint](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=lint)
+![Unit-Test](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=test)
+![Deploy-ENG](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=deploy-eng)
+![Deploy-PROD](https://github.com/nbshankar/angular-frontend/actions/workflows/ci.yml/badge.svg?branch=master&job=deploy-prod)
 
 ---
 
-## 🚀 Getting Started
+## 🌐 Application URLs
 
-### Installation
+- **ENG:** [https://nbshankar-angular-ui-eng.github.io](https://nbshankar-angular-ui-eng.github.io)
+- **PROD:** [https://nbshankar-angular-ui-prod.github.io](https://nbshankar-angular-ui-prod.github.io)
 
-```bash
-git clone <repo-url>
-cd angular-frontend
-npm install
+---
+
+## 📑 Table of Contents
+
+- [Project Overview](#-project-overview)
+- [Repository Structure](#-repository-structure)
+- [Environments](#-environments)
+- [Backend API Integration](#-backend-api-integration)
+- [CI/CD Workflow](#-cicd-workflow)
+- [Application URLs](#-application-urls)
+- [Local Development Notes](#-local-development-notes)
+
+---
+
+### 🚀 Project Overview
+
+- **Framework:** Angular (managed with Nx workspace).
+- **Build Outputs:**
+  - Local Development → `dist/local`
+  - ENG Environment → `dist/eng`
+  - PROD Environment → `dist/prod`
+- **Deployment Strategy:** GitHub Actions CI/CD
+  - On push to `master`, ENG and PROD builds are generated and deployed to GitHub Pages.
+  - Each environment is served under a different GitHub Pages URL.
+  - The difference in URLs is achieved by deploying builds into environment-specific repositories, which GitHub Pages then serves.
+
+---
+
+### 📂 Repository Structure
+
+```
+angular-frontend/
+├── src/
+│   ├── app/                 # Angular components and modules
+│   ├── assets/              # Static assets
+│   ├── environments/        # Environment configs (local/eng/prod)
+│   └── index.html
+├── project.json             # Nx project config
+├── package.json             # Dependencies
+├── tsconfig.*.json          # TypeScript configs
+└── .github/workflows/ci.yml # CI/CD pipeline
 ```
 
-### Running the App
+---
 
-```bash
-npm start
+### 🌍 Environments
+
+#### Local Development
+
+- Runs against the ENG backend.
+- Environment file: `src/environments/environment.ts` (points to `environment.eng.ts`).
+- Serve locally with: `nx serve angular-frontend`
+- Output path: `dist/local`
+
+#### ENG
+
+- Uses the ENG backend.
+- Environment file: `src/environments/environment.eng.ts`
+- Build with:  
+  `nx build angular-frontend --configuration eng`
+- Output path: `dist/eng`
+- Deployment handled through GitHub Pages.
+
+#### PROD
+
+- Uses the PROD backend.
+- Environment file: `src/environments/environment.prod.ts`
+- Build with:  
+  `nx build angular-frontend --configuration production`
+- Output path: `dist/prod`
+- Deployment handled through GitHub Pages.
+
+---
+
+### 🔗 Backend API Integration
+
+The Angular app integrates with both **Node.js** and **Python** backends hosted on Render.  
+Each environment points to the correct backend URL via `environment.ts` files.
+
+- **ENG**
+  - Node.js API: `https://shankar-nodejs-backend-eng.onrender.com`
+  - Python API: `https://shankar-python-backend-eng.onrender.com`
+- **PROD**
+  - Node.js API: `https://shankar-nodejs-backend-prod.onrender.com`
+  - Python API: `https://shankar-python-backend-prod.onrender.com`
+
+Angular services dynamically use these endpoints based on environment:
+
+```ts
+import { environment } from "../environments/environment";
+
+this.http.get(`${environment.apiUrl}/users`); // Example API call
 ```
 
-The app will be available at `http://localhost:4200` when you run in local.
+---
+
+### ⚙️ CI/CD Workflow
+
+- Workflow file: `.github/workflows/ci.yml`
+- Jobs:
+  1. **Build:** runs `nx build angular-frontend`
+  2. **Lint:** runs `nx lint angular-frontend`
+  3. **Unit Test:** runs `nx test angular-frontend`
+  4. **Deploy-ENG:** builds and deploys to ENG GitHub Pages
+  5. **Deploy-PROD:** builds and deploys to PROD GitHub Pages
+- Only `master` branch triggers deployment.
 
 ---
 
-## 📜 Scripts
+### 🛠️ Local Development Notes
 
-| Command         | Description           |
-| --------------- | --------------------- |
-| `npm run start` | Run the server        |
-| `npm run build` | Build for development |
-| `npm run test`  | Run unit tests        |
-| `npm run lint`  | Run ESLint checks     |
-
----
-
-## Commit Guidelines
-
-- Do **not** commit directly to `master`.
-- Create a feature branch:
-
-  ```bash
-  git checkout -b feature/my-change
-  ```
-
-- Commit with meaningful messages:
-
-  ```bash
-  git commit -m "feat(ui): add new dashboard component"
-  ```
-
-- Push and open a Pull Request for review.
-
----
-
-## 🌍 Environments
-
-The application is deployed on [Render](https://render.com) across three environments:
-
-| Environment | Angular UI URL                                        | NodeJS API URL                                      | Python API URL                              |
-| ----------- | ----------------------------------------------------- | --------------------------------------------------- | ------------------------------------------- |
-| Eng         | <https://shankar-angular-frontend-eng.onrender.com/>  | <https://shankar-nodejs-backend-eng.onrender.com/>  | <https://python-backend-eng.onrender.com/>  |
-| Prod        | <https://shankar-angular-frontend-prod.onrender.com/> | <https://shankar-nodejs-backend-prod.onrender.com/> | <https://python-backend-prod.onrender.com/> |
-
----
-
-## Architecture
-
-![Architecture](./architecture.png)
-
----
+- Run lint: `npx nx lint angular-frontend`
+- Run tests: `npx nx test angular-frontend`
+- Run dev build: `npx nx build angular-frontend --configuration development`

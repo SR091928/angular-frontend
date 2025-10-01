@@ -6,7 +6,8 @@ on:
       - "**"
 
 jobs:
-  CI-Build-Lint-Test:
+  build:
+    name: Run Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -19,19 +20,52 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Build
         run: npx nx build angular-frontend
-      
+
+  lint:
+    needs: build
+    name: Run Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Lint
         run: npx nx lint angular-frontend
+
+  test:
+    needs: lint
+    name: Run Unit Tests with Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
 
       - name: Unit Tests
         run: npx nx test angular-frontend --ci --code-coverage
 
-  deploy:
+  deploy-eng:
+    needs: test
+    name: Deploy App to ENG
     runs-on: ubuntu-latest
-    needs: CI-Build-Lint-Test
     if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout source
@@ -60,7 +94,23 @@ jobs:
           git push origin master
           cd -
 
-      # --- PROD Build & Deploy ---
+  deploy-prod:
+    needs: deploy-eng
+    name: Deploy App to PROD
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build PROD
         run: npx nx build angular-frontend --configuration production
 
@@ -75,8 +125,3 @@ jobs:
           git commit -m "Deploy PROD build $(date)" || echo "No PROD changes"
           git push origin master
           cd -
-
-      - name: Show URLs
-        run: |
-          echo "✅ ENG deployed:  https://nbshankar-angular-ui-eng.github.io/"
-          echo "✅ PROD deployed: https://nbshankar-angular-ui-prod.github.io/"
