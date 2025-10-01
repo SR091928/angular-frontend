@@ -12,19 +12,19 @@
       console.log("404.html debug:");
       console.log("current pathname:", window.location.pathname);
       console.log("repo:", repo);
-      console.log("base:", base);
+      // console.log("base:", base);
 
-      if (window.location.pathname !== base) {
-        // Save current path for Angular to restore after reload
+      // if (window.location.pathname !== base) {
+      //   // Save current path for Angular to restore after reload
         sessionStorage.setItem(
           "redirect",
-          location.pathname + location.search + location.hash
+          location.pathname
         );
         console.log("Redirecting to:", base);
-        window.location.href = base;
-      } else {
-        console.log("Already at base, not redirecting.");
-      }
+        window.location.href = window.location.pathname;
+      // } else {
+      //   console.log("Already at base, not redirecting.");
+      // }
     </script>
   </body>
 </html>
