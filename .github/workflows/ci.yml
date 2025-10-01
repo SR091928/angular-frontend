@@ -26,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npx nx build angular-frontend
+        run: npm run build
 
   lint:
     name: Run Lint
@@ -44,7 +44,7 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npx nx lint angular-frontend
+        run: npm run lint
 
   test:
     name: Run Unit Tests with Coverage
@@ -62,7 +62,7 @@ jobs:
         run: npm ci
 
       - name: Unit Tests
-        run: npx nx test angular-frontend --ci --code-coverage
+        run: npm run test
 
   deploy-eng:
     needs: [build, lint, test]
@@ -82,7 +82,7 @@ jobs:
         run: npm ci
 
       - name: Build ENG
-        run: npx nx build angular-frontend --configuration eng
+        run: npm run build:eng
 
       - name: Deploy to ENG Pages
         run: |
@@ -116,7 +116,7 @@ jobs:
   #       run: npm ci
 
   #     - name: Build PROD
-  #       run: npx nx build angular-frontend --configuration production
+  #       run: npm run build:prod
 
   #     - name: Deploy PROD
   #       run: |
