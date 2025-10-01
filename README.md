@@ -6,7 +6,6 @@
 ![Node.js](https://img.shields.io/badge/Node.js-20-green)
 ![Jest](https://img.shields.io/badge/Jest-29-brightgreen)
 ![Nx](https://img.shields.io/badge/Nx-17-blue)
-![Nx%20Cloud](https://img.shields.io/badge/Nx--Cloud-enabled-yellow)
 
 ---
 
