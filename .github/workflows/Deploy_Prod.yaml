@@ -1,0 +1,35 @@
+name: Deploy_Prod
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to deploy"
+        required: true
+        default: "master"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-prod:
+    name: Deploy to PROD
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npx nx build angular-frontend --configuration production
+
+      - name: Deploy PROD to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOY_SECRET }}
+          external_repository: nbshankar/angular-ui-prod.github.io
+          publish_branch: master
+          publish_dir: ./dist/prod
+          force_orphan: true

@@ -1,0 +1,35 @@
+name: Deploy_Eng
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch to deploy"
+        required: true
+        default: "master"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-eng:
+    name: Deploy to ENG
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build:eng
+
+      - name: Deploy ENG to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOY_SECRET }}
+          external_repository: nbshankar/angular-ui-eng.github.io
+          publish_branch: master
+          publish_dir: ./dist/eng
+          force_orphan: true
