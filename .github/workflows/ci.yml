@@ -5,6 +5,10 @@ on:
     branches:
       - "**"
 
+# Restrict default permissions for all jobs
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Run Build
