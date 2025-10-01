@@ -55,6 +55,7 @@ jobs:
           publish_dir: ./dist/eng
           external_repository: nbshankar/nbshankar-angular-ui-eng.github.io
           publish_branch: master
+          force_orphan: true
 
   deploy-prod:
     needs: deploy-eng
@@ -82,3 +83,4 @@ jobs:
           publish_dir: ./dist/prod
           external_repository: nbshankar/nbshankar-angular-ui-prod.github.io
           publish_branch: master
+          force_orphan: true
