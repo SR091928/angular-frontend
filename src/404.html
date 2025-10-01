@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      (function() {
+        // Restore the original path after redirect
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // Save current path so Angular router can pick it up after reload
+      sessionStorage.setItem('redirect', location.pathname + location.search + location.hash);
+
+      // Read <base href="..."> from the current document
+      var base = document.querySelector('base') ? document.querySelector('base').getAttribute('href') : '/';
+
+      // Redirect back to the Angular app base (works for both ENG & PROD)
+      window.location.href = base;
+    </script>
+  </body>
+</html>
