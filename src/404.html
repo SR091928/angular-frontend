@@ -6,17 +6,14 @@
   </head>
   <body>
     <script type="text/javascript">
-      // Compute values
       var repo = window.location.pathname.split('/')[1];
       var base = '/' + repo + '/';
 
-      // Debug output
       console.log("404.html debug:");
       console.log("current pathname:", window.location.pathname);
       console.log("repo:", repo);
       console.log("base:", base);
 
-      // Only redirect if not already at base (to prevent double-appending)
       if (!window.location.pathname.startsWith(base) || window.location.pathname === base) {
         // Save current path for Angular to restore after reload
         sessionStorage.setItem(
