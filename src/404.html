@@ -6,20 +6,29 @@
   </head>
   <body>
     <script type="text/javascript">
-      // Set your repo base
+      // Compute values
       var repo = window.location.pathname.split('/')[1];
       var base = '/' + repo + '/';
 
-      // If we're NOT at the base, do the redirect logic
-      if (window.location.pathname !== base) {
+      // Debug output
+      console.log("404.html debug:");
+      console.log("current pathname:", window.location.pathname);
+      console.log("repo:", repo);
+      console.log("base:", base);
+
+      // Only redirect if not already at base (to prevent double-appending)
+      if (!window.location.pathname.startsWith(base) || window.location.pathname === base) {
         // Save current path for Angular to restore after reload
         sessionStorage.setItem(
           "redirect",
           location.pathname + location.search + location.hash
         );
+        console.log("Redirecting to:", base);
         window.location.href = base;
+      } else {
+        console.log("Already at base, not redirecting.");
       }
-      // If we're already at the base, do nothing! Let Angular load.
+      // If already at base, do nothing -- let Angular load and handle redirect from sessionStorage
     </script>
   </body>
 </html>
