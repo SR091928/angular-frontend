@@ -58,7 +58,7 @@
             }
           ],
           "outputPath": "dist/eng",
-          "baseHref": "/"
+          "baseHref": "/angular-ui-eng.github.io/"
         }
       }
     },
