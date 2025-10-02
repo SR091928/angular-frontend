@@ -2,35 +2,37 @@
   "name": "angular-frontend",
   "projectType": "application",
   "sourceRoot": "src",
-  "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "development",
       "options": {
-        "outputPath": "dist/local",
+        "outputPath": "dist",
         "index": "src/index.html",
         "main": "src/main.ts",
         "polyfills": "src/polyfills.ts",
         "tsConfig": "tsconfig.app.json",
-        "assets": ["src/favicon.ico", "src/assets", "src/404.html"],
+        "assets": ["src/favicon.ico", "src/assets"],
         "styles": ["src/styles.scss"],
         "scripts": []
       },
       "configurations": {
         "development": {
+          "buildOptimizer": false,
           "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true,
+          "outputPath": "dist/local",
+          "baseHref": "/",
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
               "with": "src/environments/environment.eng.ts"
             }
-          ],
-          "outputPath": "dist/local",
-          "baseHref": "/"
+          ]
         },
         "production": {
           "optimization": true,
@@ -44,7 +46,7 @@
             }
           ],
           "outputPath": "dist/prod",
-          "baseHref": "/angular-ui-prod.github.io/"
+          "baseHref": "/"
         },
         "eng": {
           "optimization": true,
@@ -58,7 +60,7 @@
             }
           ],
           "outputPath": "dist/eng",
-          "baseHref": "/angular-ui-eng.github.io/"
+          "baseHref": "/"
         }
       }
     },
@@ -80,7 +82,6 @@
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/unit-test-reports"],
-      "defaultConfiguration": "development",
       "options": {
         "jestConfig": "jest.config.ts",
         "setupFilesAfterEnv": ["<rootDir>/src/test-setup.ts"],
@@ -88,14 +89,6 @@
         "coverage": true,
         "coverageReporters": ["html", "text", "lcov"],
         "coverageDirectory": "coverage/unit-test-reports"
-      },
-      "configurations": {
-        "development": {
-          "codeCoverage": true
-        },
-        "production": {
-          "codeCoverage": true
-        }
       }
     },
     "lint": {
