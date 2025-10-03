@@ -62,6 +62,7 @@ jobs:
 
   deploy_eng:
     name: Deploy Eng
+    needs: [build, test, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -89,6 +90,7 @@ jobs:
 
   deploy_prod:
     name: Deploy Prod
+    needs: deploy_eng
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
