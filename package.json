@@ -5,9 +5,9 @@
   "scripts": {
     "build": "nx build angular-frontend",
     "serve": "nx serve angular-frontend",
-    "build:eng": "rimraf dist/eng && nx build angular-frontend --configuration eng",
+    "build:eng": "rimraf dist/eng && nx build angular-frontend --configuration eng --base-href=/",
     "serve:eng": "nx serve angular-frontend --configuration=eng",
-    "build:prod": "rimraf dist/prod && nx build angular-frontend --configuration production",
+    "build:prod": "rimraf dist/prod && nx build angular-frontend --configuration production --base-href=/",
     "serve:prod": "nx serve angular-frontend --configuration=production",
     "test": "nx test angular-frontend",
     "lint": "nx lint angular-frontend",

@@ -26,7 +26,6 @@
           "sourceMap": true,
           "namedChunks": true,
           "outputPath": "dist/local",
-          "baseHref": "/",
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
@@ -45,8 +44,7 @@
               "with": "src/environments/environment.prod.ts"
             }
           ],
-          "outputPath": "dist/prod",
-          "baseHref": "/"
+          "outputPath": "dist/prod"
         },
         "eng": {
           "optimization": true,
@@ -59,8 +57,7 @@
               "with": "src/environments/environment.eng.ts"
             }
           ],
-          "outputPath": "dist/eng",
-          "baseHref": "/"
+          "outputPath": "dist/eng"
         }
       }
     },
