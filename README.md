@@ -11,7 +11,7 @@
 
 ## 🌐 Application URLs
 
-- **ENG:** [https://nbshankar-angular-ui-eng.github.io](https://nbshankar-angular-ui-eng.github.io)
+- **Staging:** [https://nbshankar-angular-ui-staging.github.io](https://nbshankar-angular-ui-staging.github.io)
 - **PROD:** [https://nbshankar-angular-ui-prod.github.io](https://nbshankar-angular-ui-prod.github.io)
 
 ---
@@ -33,12 +33,10 @@
 - **Framework:** Angular (managed with Nx workspace).
 - **Build Outputs:**
   - Local Development → `dist/local`
-  - ENG Environment → `dist/eng`
+  - Staging Environment → `dist/staging`
   - PROD Environment → `dist/prod`
 - **Deployment Strategy:** GitHub Actions CI/CD
-  - On push to `master`, ENG and PROD builds are generated and deployed to GitHub Pages.
-  - Each environment is served under a different GitHub Pages URL.
-  - The difference in URLs is achieved by deploying builds into environment-specific repositories, which GitHub Pages then serves.
+  - On push to `master`, Staging and PROD builds are generated and deployed to Vercel.
 
 ---
 
@@ -49,7 +47,7 @@ angular-frontend/
 ├── src/
 │   ├── app/                 # Angular components and modules
 │   ├── assets/              # Static assets
-│   ├── environments/        # Environment configs (local/eng/prod)
+│   ├── environments/        # Environment configs (local/staging/prod)
 │   └── index.html
 ├── project.json             # Nx project config
 ├── package.json             # Dependencies
@@ -61,20 +59,20 @@ angular-frontend/
 
 ### 🌍 Environments
 
-#### Local Development
+#### Local
 
-- Runs against the ENG backend.
-- Environment file: `src/environments/environment.ts` (points to `environment.eng.ts`).
+- Runs against the staging backend.
+- Environment file: `src/environments/environment.ts` (points to `environment.staging.ts`).
 - Serve locally with: `nx serve angular-frontend`
 - Output path: `dist/local`
 
-#### ENG
+#### Staging
 
-- Uses the ENG backend.
-- Environment file: `src/environments/environment.eng.ts`
+- Uses the staging backend.
+- Environment file: `src/environments/environment.staging.ts`
 - Build with:  
-  `nx build angular-frontend --configuration eng`
-- Output path: `dist/eng`
+  `nx build angular-frontend --configuration staging`
+- Output path: `dist/staging`
 - Deployment handled through GitHub Pages.
 
 #### PROD
@@ -93,12 +91,12 @@ angular-frontend/
 The Angular app integrates with both **Node.js** and **Python** backend APIs hosted on Render.  
 Each environment points to the correct backend URL via `environment.ts` files.
 
-- **ENG**
-  - Node.js API: `https://shankar-node Nodejs-backend (TBD)-eng.onrender.com`
-  - Python API: `https://shankar-python Python-backend (TBD)-eng.onrender.com`
+- **Staging**
+  - Node.js API: TBD
+  - Python API: TBD
 - **PROD**
-  - Node.js API: `https://shankar-node Nodejs-backend (TBD)-prod.onrender.com`
-  - Python API: `https://shankar-python Python-backend (TBD)-prod.onrender.com`
+  - Node.js API: TBD
+  - Python API: TBD
 
 Angular services dynamically use these endpoints based on environment:
 
@@ -117,7 +115,7 @@ this.http.get(`${environment.api (TBD)Url}/users`); // Example API call
   1. **Build:** runs `nx build angular-frontend`
   2. **Lint:** runs `nx lint angular-frontend`
   3. **Unit Test:** runs `nx test angular-frontend`
-  4. **Deploy-ENG:** builds and deploys to ENG GitHub Pages
+  4. **Deploy-Staging:** builds and deploys to Vercel
   5. **Deploy-PROD:** builds and deploys to PROD GitHub Pages
 - Only `master` branch triggers deployment.
 
@@ -138,14 +136,14 @@ Two separate Vercel projects are maintained for this repository:
 
 | Environment | Project | Config File | Command |
 |--------------|----------|--------------|----------|
-| ENG | `angular-frontend-eng` | `vercel.eng.json` | `vercel -A vercel.eng.json` |
+| staging | `angular-frontend-staging` | `vercel.staging.json` | `vercel -A vercel.staging.json` |
 | PROD | `angular-frontend-prod` | `vercel.prod.json` | `vercel --prod -A vercel.prod.json` |
 
 ### 🔑 Environment Variables
 
 | Variable | Example | Description |
 |-----------|----------|-------------|
-| `ENV` | `eng` / `prod` | Active deployment environment |
+| `ENV` | `staging` / `prod` | Active deployment environment |
 | `API_BASE_URL` | TBD | API URL placeholder for NodeJS/Python services |
 
 ---

@@ -29,7 +29,7 @@
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
-              "with": "src/environments/environment.eng.ts"
+              "with": "src/environments/environment.staging.ts"
             }
           ]
         },
@@ -46,7 +46,7 @@
           ],
           "outputPath": "dist/prod"
         },
-        "eng": {
+        "staging": {
           "optimization": true,
           "outputHashing": "all",
           "sourceMap": false,
@@ -54,10 +54,10 @@
           "fileReplacements": [
             {
               "replace": "src/environments/environment.ts",
-              "with": "src/environments/environment.eng.ts"
+              "with": "src/environments/environment.staging.ts"
             }
           ],
-          "outputPath": "dist/eng"
+          "outputPath": "dist/staging"
         }
       }
     },
@@ -68,8 +68,8 @@
         "development": {
           "browserTarget": "angular-frontend:build:development"
         },
-        "eng": {
-          "browserTarget": "angular-frontend:build:eng"
+        "staging": {
+          "browserTarget": "angular-frontend:build:staging"
         },
         "production": {
           "browserTarget": "angular-frontend:build:production"
