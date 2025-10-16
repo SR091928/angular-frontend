@@ -1,12 +1,12 @@
 {
-  "name": "angular-frontend",
+  "name": "@sr091928/angular-frontend",
   "version": "1.0.0",
   "description": "Angular frontend application with Jest and Cypress configured for testing.",
   "scripts": {
     "build": "nx build angular-frontend",
     "serve": "nx serve angular-frontend",
-    "build:eng": "rimraf dist/eng && nx build angular-frontend --configuration eng",
-    "serve:eng": "nx serve angular-frontend --configuration=eng",
+    "build:staging": "rimraf dist/staging && nx build angular-frontend --configuration staging",
+    "serve:staging": "nx serve angular-frontend --configuration=staging",
     "build:prod": "rimraf dist/prod && nx build angular-frontend --configuration production",
     "serve:prod": "nx serve angular-frontend --configuration=production",
     "test": "nx test angular-frontend",
@@ -63,5 +63,14 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   },
-  "nx": {}
+  "nx": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SR091928/angular-frontend.git"
+  },
+  "author": "SR091928 Organization",
+  "bugs": {
+    "url": "https://github.com/SR091928/angular-frontend/issues"
+  },
+  "homepage": "https://github.com/SR091928/angular-frontend#readme"
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "sr091928-angular-frontend-prod",
+  "name": "sr091928-angular-frontend-staging",
   "builds": [
     {
       "src": "package.json",
@@ -8,7 +8,7 @@
     }
   ],
   "env": {
-    "ENV": "prod"
+    "ENV": "staging"
   },
   "github": {
     "enabled": true,

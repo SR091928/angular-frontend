@@ -90,22 +90,22 @@ angular-frontend/
 
 ### 🔗 Backend API Integration
 
-The Angular app integrates with both **Node.js** and **Python** backends hosted on Render.  
+The Angular app integrates with both **Node.js** and **Python** backend APIs hosted on Render.  
 Each environment points to the correct backend URL via `environment.ts` files.
 
 - **ENG**
-  - Node.js API: `https://shankar-nodejs-backend-eng.onrender.com`
-  - Python API: `https://shankar-python-backend-eng.onrender.com`
+  - Node.js API: `https://shankar-node Nodejs-backend (TBD)-eng.onrender.com`
+  - Python API: `https://shankar-python Python-backend (TBD)-eng.onrender.com`
 - **PROD**
-  - Node.js API: `https://shankar-nodejs-backend-prod.onrender.com`
-  - Python API: `https://shankar-python-backend-prod.onrender.com`
+  - Node.js API: `https://shankar-node Nodejs-backend (TBD)-prod.onrender.com`
+  - Python API: `https://shankar-python Python-backend (TBD)-prod.onrender.com`
 
 Angular services dynamically use these endpoints based on environment:
 
 ```ts
 import { environment } from "../environments/environment";
 
-this.http.get(`${environment.apiUrl}/users`); // Example API call
+this.http.get(`${environment.api (TBD)Url}/users`); // Example API call
 ```
 
 ---
@@ -128,3 +128,28 @@ this.http.get(`${environment.apiUrl}/users`); // Example API call
 - Run lint: `npx nx lint angular-frontend`
 - Run tests: `npx nx test angular-frontend`
 - Run dev build: `npx nx build angular-frontend --configuration development`
+
+
+---
+
+## 🚀 Deployment (Vercel)
+
+Two separate Vercel projects are maintained for this repository:
+
+| Environment | Project | Config File | Command |
+|--------------|----------|--------------|----------|
+| ENG | `angular-frontend-eng` | `vercel.eng.json` | `vercel -A vercel.eng.json` |
+| PROD | `angular-frontend-prod` | `vercel.prod.json` | `vercel --prod -A vercel.prod.json` |
+
+### 🔑 Environment Variables
+
+| Variable | Example | Description |
+|-----------|----------|-------------|
+| `ENV` | `eng` / `prod` | Active deployment environment |
+| `API_BASE_URL` | TBD | API URL placeholder for NodeJS/Python services |
+
+---
+
+## 🧾 Ownership
+
+This project is now maintained under the **SR091928 Organization**.
