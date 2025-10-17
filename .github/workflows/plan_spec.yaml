@@ -6,7 +6,10 @@ permissions:
 on:
   push:
     branches:
-      - "**"
+      - master
+      - staging
+      - feature/**
+      - bugfix/**
 
 jobs:
   lint:
@@ -87,7 +90,7 @@ jobs:
           cp vercel.staging.json vercel.json
           npx vercel --token=${{ secrets.VERCEL_TOKEN }} \
                      --confirm --prod
-        env:
+        env: 
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_STAGING }}
 
