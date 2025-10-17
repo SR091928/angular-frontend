@@ -108,8 +108,10 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
+
       - name: Build Prod
         run: npm run build:prod
+
       - name: Deploy to Vercel (Prod)
         run: |
           cp vercel.prod.json vercel.json
