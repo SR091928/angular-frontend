@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "sr091928-angular-frontend-staging",
+  "name": "sr-angular-frontend-staging",
   "builds": [
     {
       "src": "package.json",

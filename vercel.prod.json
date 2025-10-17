@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "sr091928-angular-frontend-prod",
+  "name": "sr-angular-frontend-prod",
   "builds": [
     {
       "src": "package.json",
