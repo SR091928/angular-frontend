@@ -6,7 +6,10 @@ permissions:
 on:
   push:
     branches:
-      - "**"
+      - master
+      - staging
+      - feature/**
+      - bugfix/**
 
 jobs:
   lint:
@@ -27,6 +30,24 @@ jobs:
       - name: Run Lint
         run: npm run lint
 
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
   test:
     name: Unit Tests
     runs-on: ubuntu-latest
@@ -45,26 +66,8 @@ jobs:
       - name: Run Unit Tests
         run: npm run test
 
-  build:
-    name: CI - Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-  deploy_eng:
-    name: Deploy Eng
+  deploy_staging:
+    name: Deploy Staging
     needs: [build, test, lint]
     runs-on: ubuntu-latest
     steps:
@@ -79,21 +82,21 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Eng
-        run: npm run build:eng
+      - name: Build Staging
+        run: npm run build:staging
 
-      - name: Deploy to Vercel (Eng)
+      - name: Deploy to Vercel (Staging)
         run: |
-          cp vercel.eng.json vercel.json
+          cp vercel.staging.json vercel.json
           npx vercel --token=${{ secrets.VERCEL_TOKEN }} \
                      --confirm --prod
-        env:
+        env: 
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_ENG }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_STAGING }}
 
   deploy_prod:
     name: Deploy Prod
-    needs: deploy_eng
+    needs: deploy_staging
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
@@ -105,8 +108,10 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm install
+
       - name: Build Prod
         run: npm run build:prod
+
       - name: Deploy to Vercel (Prod)
         run: |
           cp vercel.prod.json vercel.json

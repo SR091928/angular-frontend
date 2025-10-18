@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "name": "sr-angular-frontend-prod",
+  "name": "sr-angular-frontend-staging",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/angular"
+      "src": "dist/**/*",
+      "use": "@vercel/static"
     }
   ],
   "env": {
-    "ENV": "prod"
+    "ENV": "staging"
   },
   "github": {
     "enabled": true,
