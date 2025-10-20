@@ -3,8 +3,8 @@
   "name": "sr-angular-frontend-prod",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/angular"
+      "src": "dist/**/*",
+      "use": "@vercel/static"
     }
   ],
   "env": {
