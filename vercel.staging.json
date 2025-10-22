@@ -1,11 +1,10 @@
 {
   "version": 2,
   "name": "sr-angular-frontend-staging",
-  "builds": [
-    {
-      "src": "dist/**/*",
-      "use": "@vercel/static"
-    }
+  "public": true,
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "env": {
     "ENV": "staging"

@@ -5,9 +5,9 @@
   "scripts": {
     "build": "nx build angular-frontend",
     "serve": "nx serve angular-frontend",
-    "build:staging": "rimraf dist/staging && nx build angular-frontend --configuration staging",
+    "build:staging": "rimraf dist && nx build angular-frontend --configuration staging",
     "serve:staging": "nx serve angular-frontend --configuration=staging",
-    "build:prod": "rimraf dist/prod && nx build angular-frontend --configuration production",
+    "build:prod": "rimraf dist && nx build angular-frontend --configuration production",
     "serve:prod": "nx serve angular-frontend --configuration=production",
     "test": "nx test angular-frontend",
     "lint": "nx lint angular-frontend",
