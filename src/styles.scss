@@ -1,5 +1,55 @@
+/* ✅ Angular Material v18+ theme setup (M3) */
+
+@use '@angular/material' as mat;
+
+/* Define a color configuration */
+$my-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$red-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    brand-family: 'Segoe UI, Roboto, sans-serif',
+    bold-weight: 600,
+  ),
+  density: (
+    scale: 0
+  )
+));
+
+/* Apply it globally */
+:root {
+  @include mat.all-component-themes($my-theme);
+}
+
+/* ✅ Custom global styles */
+
+html,
 body {
+  height: 100%;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #d8f8d8;
+  color: black;
+  overflow-x: hidden;
+}
+
+.page {
+  padding-top: 80px; /* adjust for fixed header */
+  padding-bottom: 60px; /* adjust for fixed footer */
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+h2.title {
+  text-align: center;
+  font-weight: 600;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 2000 !important;
 }

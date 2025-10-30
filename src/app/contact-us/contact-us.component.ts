@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -49,7 +48,7 @@ export class ContactUsComponent {
   }
 
   goBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/welcome']);
   }
 
   onSubmit() {

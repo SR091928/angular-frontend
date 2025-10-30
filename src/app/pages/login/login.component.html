@@ -1,0 +1,58 @@
+<div class="login-page">
+  <h2 class="title">Login</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card" novalidate>
+    <!-- User ID -->
+    <div class="field">
+      <label for="userId" class="label">User ID*</label>
+      <input
+        id="userId"
+        class="text-input"
+        formControlName="userId"
+        placeholder="Email / Mobile / User ID"
+        autocomplete="off"
+      />
+      <div
+        class="error"
+        *ngIf="form.get('userId')?.touched && form.get('userId')?.invalid"
+      >
+        User ID is required
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="field">
+      <label for="password" class="label">Password*</label>
+      <input
+        id="password"
+        class="text-input"
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+        placeholder="Enter password"
+        autocomplete="off"
+      />
+      <div
+        class="error"
+        *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+      >
+        Password is required
+      </div>
+    </div>
+
+    <!-- Show Password Checkbox (uses change event, not ngModel) -->
+    <div class="show-password">
+      <input
+        type="checkbox"
+        id="showPassword"
+        (change)="onShowPasswordChange($event)"
+      />
+      <label for="showPassword">Show Password</label>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button type="submit" class="btn primary">Login</button>
+      <button type="button" class="btn outline" (click)="goBack()">Back</button>
+    </div>
+  </form>
+</div>
