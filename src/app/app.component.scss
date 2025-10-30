@@ -1,8 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
-
-// Example SCSS variable
-$primary-color: #1976d2;
-
-.app-root {
-  color: $primary-color;
+/* Keep content between header and footer without overflow */
+.app-main {
+  min-height: calc(100vh - 105px); /* header 60 + footer 45 */
+  background-color: #d8f8d8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

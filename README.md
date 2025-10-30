@@ -18,7 +18,7 @@ This project uses **Jest** for Angular unit testing:
 Run tests:
 
 ```bash
-npm test
+npm run test
 ```
 
 ---
