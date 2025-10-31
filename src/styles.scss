@@ -1,24 +1,15 @@
-/* ===========================
-   Carbon Design System styles
-   =========================== */
-@import "carbon-components/scss/globals/scss/styles.scss";
+/* Global styles and color variables */
+:root {
+  --primary-purple: #4b006e;
+  --text-primary: #2d2d2d;
+  --text-secondary: #555555;
+}
 
-/* ===========================
-   Global app overrides
-   =========================== */
-html, body {
+html,
+body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'IBM Plex Sans', 'Segoe UI', Arial, sans-serif;
-  background-color: #e6f9e6;
-  height: 100%;
-  overflow-x: hidden;
-}
-
-.page {
-  padding-top: 80px; // avoid header overlap
-}
-
-button {
-  font-family: inherit;
+  background: #ede4f9; /* light purple global background */
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
 }

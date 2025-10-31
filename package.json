@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Angular frontend application with Jest and Cypress configured for testing.",
   "scripts": {
+    "local": "rm dist && npm ru build && npm run serve",
     "build": "nx build angular-frontend",
-    "serve": "nx serve angular-frontend",
+    "serve": "nx serve angular-frontend --open",
     "build:staging": "rimraf dist && nx build angular-frontend --configuration staging",
     "serve:staging": "nx serve angular-frontend --configuration=staging",
     "build:prod": "rimraf dist && nx build angular-frontend --configuration production",

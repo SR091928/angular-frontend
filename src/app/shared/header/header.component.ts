@@ -12,8 +12,10 @@ import { Router, RouterModule } from '@angular/router';
 export class HeaderComponent {
   constructor(public router: Router) {}
 
-  // Hide header on /contact-us route
   shouldShowHeader(): boolean {
-    return this.router.url !== '/contact-us';
+    // Hide header on specific routes
+    const hideFor = ['/welcome', '/login', '/signup', '/']; // add more if needed
+    const url = this.router.url.split('?')[0];
+    return !hideFor.includes(url);
   }
 }
