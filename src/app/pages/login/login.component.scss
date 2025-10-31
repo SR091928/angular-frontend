@@ -1,115 +1,89 @@
 .login-page {
-  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px);
+  background-color: #e0f7df;
+}
+
+.login-card {
+  background: #fff;
+  width: 420px;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+}
+
+.login-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
+}
+
+input[ibmText] {
+  width: 100%;
+}
+
+.invalid {
+  border: 1px solid #da1e28 !important;
+}
+
+.error-msg {
+  font-size: 0.8rem;
+  color: #da1e28;
+  margin-top: 0.3rem;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 60px 16px 40px;
-  background-color: #d8f8d8;
-  box-sizing: border-box;
+}
 
-  .title {
-    font-size: 32px;
-    font-weight: 600;
-    color: #000;
-    margin-bottom: 24px;
-  }
+.password-wrapper input {
+  flex: 1;
+}
 
-  .form-card {
-    width: 100%;
-    max-width: 640px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 28px 32px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
+.icon-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
 
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.icon-btn img {
+  width: 20px;
+  height: 20px;
+  filter: invert(40%);
+}
 
-    .label {
-      font-size: 14px;
-      font-weight: 500;
-      color: #222;
-    }
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
 
-    .text-input {
-      font-size: 16px;
-      padding: 10px 12px;
-      border: none;
-      border-bottom: 2px solid #000; /* underline */
-      background: transparent;
-      outline: none;
-      color: #000;
-      border-radius: 2px;
+button {
+  border-radius: 25px;
+  font-weight: 600;
+  padding: 0.6rem 1.8rem;
+}
 
-      &::placeholder {
-        color: #8f8f8f;
-      }
+button[ibmButton='primary'] {
+  background-color: #0072c3;
+  color: #fff;
+}
 
-      &:focus {
-        border-bottom-color: #333;
-      }
-    }
-
-    .error {
-      color: #c62828;
-      font-size: 0.9rem;
-    }
-  }
-
-  .show-password {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 15px;
-    color: #222;
-
-    input[type='checkbox'] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-  }
-
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 6px;
-
-    .btn {
-      padding: 10px 26px;
-      border-radius: 26px;
-      font-size: 16px;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s ease;
-    }
-
-    .primary {
-      background: #000;
-      color: #fff;
-
-      &:hover {
-        background-color: #333;
-      }
-    }
-
-    .outline {
-      background: #fff;
-      color: #000;
-      border: 2px solid #000;
-
-      &:hover {
-        background: #000;
-        color: #fff;
-      }
-    }
-  }
+button[ibmButton='secondary'] {
+  background-color: #262626;
+  color: #fff;
 }
