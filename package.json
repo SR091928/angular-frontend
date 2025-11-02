@@ -66,8 +66,7 @@
     "nx": "21.5.3",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.4.4",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "ts-node": "^10.9.2"
   },
   "nx": {},
   "overrides": {

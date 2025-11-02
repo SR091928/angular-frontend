@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+// src/app/pages/login/login.component.ts
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { GoogleAuthService } from '../../services/google-auth.service';
 
 @Component({
@@ -9,21 +10,24 @@ import { GoogleAuthService } from '../../services/google-auth.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements AfterViewInit {
-  fb = inject(FormBuilder);
-  router = inject(Router);
+export class LoginComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
   googleAuth = inject(GoogleAuthService);
 
-  loginForm: FormGroup = this.fb.group({
+  loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
   });
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
+    // Ensure script tag is added
     this.googleAuth.initialize();
-    this.googleAuth.renderButton('googleSignInButton');
+
+    // Render the button (this will wait for the script if needed)
+    this.googleAuth.renderButton('google-btn');
   }
 
   onLogin(): void {
@@ -31,16 +35,15 @@ export class LoginComponent implements AfterViewInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-    console.log('Logging in with form values:', this.loginForm.value);
-    // Perform API call here...
+
+    // Mock success: take name from email local part and navigate to /home
+    const email = this.loginForm.value.email || '';
+    const name = email.split('@')[0] || 'User';
+    this.googleAuth.user$.next({ name });
     this.router.navigate(['/home']);
   }
 
-  back(): void {
+  onBack(): void {
     this.router.navigate(['/welcome']);
-  }
-
-  forgotPassword(): void {
-    this.router.navigate(['/forgot-password']);
   }
 }

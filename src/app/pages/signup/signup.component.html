@@ -23,6 +23,7 @@
           formControlName="password"
           placeholder="Enter password"
           [class.invalid]="form.get('password')?.invalid && form.get('password')?.touched"
+          autocomplete="password"
         />
         <img
           src="assets/icons/{{ showPassword ? 'eye-hide.svg' : 'eye-show.svg' }}"
@@ -46,6 +47,7 @@
             (form.hasError('mismatch') && form.get('confirmPassword')?.touched) ||
             (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched)
           "
+          autocomplete="confirm-password"
         />
         <img
           src="assets/icons/{{ showConfirmPassword ? 'eye-hide.svg' : 'eye-show.svg' }}"

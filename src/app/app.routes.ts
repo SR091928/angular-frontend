@@ -4,6 +4,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { HomeComponent } from 'src/home/home.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -22,6 +23,10 @@ export const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   },
   {
     path:'contact-us',

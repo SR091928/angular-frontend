@@ -1,0 +1,6 @@
+<div class="home-container">
+  <h1>Welcome, {{ (googleAuth.user$ | async)?.name || 'User' }} 👋</h1>
+  <p>You are now logged in to SR09192835 — your digital gateway.</p>
+
+  <button (click)="logout()" class="btn-primary">Logout</button>
+</div>

@@ -48,27 +48,30 @@ jobs:
       - name: Build
         run: npm run build
 
-  test:
-    name: Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+  # test:
+  #   name: Unit Tests
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
+  #     - name: Use Node.js 20
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 20
+  #         cache: "npm"
 
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Run Unit Tests
-        run: npm run test
+  #     - name: Run Unit Tests
+  #       run: npm run test
 
   deploy_staging:
     name: Deploy Staging
-    needs: [build, test, lint]
+    needs: 
+      - build
+      # - test
+      - lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

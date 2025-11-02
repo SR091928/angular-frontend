@@ -1,27 +1,41 @@
-<div class="login-card">
-  <h2>Welcome Back</h2>
-  <p class="subtitle">Sign in to continue your journey</p>
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="title">Welcome Back</h2>
+    <p class="subtitle">Sign in to continue your journey</p>
 
-  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <label>Email*</label>
-    <input type="email" formControlName="email" placeholder="Enter your email" />
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+      <label for="email">Email*</label>
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        autocomplete="username"
+      />
 
-    <label>Password*</label>
-    <div class="password-field">
-      <input type="password" formControlName="password" placeholder="Enter password" />
+      <label for="password">Password*</label>
+      <input
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Enter password"
+        autocomplete="current-password"
+      />
+
+      <div class="forgot-row">
+        <a class="forgot-link">Forgot Password?</a>
+      </div>
+
+      <div class="button-row">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-outline" (click)="onBack()">Back</button>
+      </div>
+    </form>
+
+    <div class="divider">
+      <span>Or</span>
     </div>
 
-    <div class="actions">
-      <a class="forgot" (click)="forgotPassword()">Forgot Password?</a>
-    </div>
-
-    <div class="button-row">
-      <button type="submit" class="btn primary">Login</button>
-      <button type="button" class="btn secondary" (click)="back()">Back</button>
-    </div>
-  </form>
-
-  <div class="divider-text"></div>
-
-  <div id="googleSignInButton" class="google-btn-container"></div>
+    <div id="google-btn" class="google-btn-container"></div>
+  </div>
 </div>
