@@ -1,58 +1,41 @@
-<div class="login-page">
-  <h2 class="title">Login</h2>
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="title">Welcome Back</h2>
+    <p class="subtitle">Sign in to continue your journey</p>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-card" novalidate>
-    <!-- User ID -->
-    <div class="field">
-      <label for="userId" class="label">User ID*</label>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
+      <label for="email">Email*</label>
       <input
-        id="userId"
-        class="text-input"
-        formControlName="userId"
-        placeholder="Email / Mobile / User ID"
-        autocomplete="off"
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        autocomplete="username"
       />
-      <div
-        class="error"
-        *ngIf="form.get('userId')?.touched && form.get('userId')?.invalid"
-      >
-        User ID is required
-      </div>
-    </div>
 
-    <!-- Password -->
-    <div class="field">
-      <label for="password" class="label">Password*</label>
+      <label for="password">Password*</label>
       <input
         id="password"
-        class="text-input"
-        [type]="showPassword ? 'text' : 'password'"
+        type="password"
         formControlName="password"
         placeholder="Enter password"
-        autocomplete="off"
+        autocomplete="current-password"
       />
-      <div
-        class="error"
-        *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
-      >
-        Password is required
+
+      <div class="forgot-row">
+        <a class="forgot-link">Forgot Password?</a>
       </div>
+
+      <div class="button-row">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-outline" (click)="onBack()">Back</button>
+      </div>
+    </form>
+
+    <div class="divider">
+      <span>Or</span>
     </div>
 
-    <!-- Show Password Checkbox (uses change event, not ngModel) -->
-    <div class="show-password">
-      <input
-        type="checkbox"
-        id="showPassword"
-        (change)="onShowPasswordChange($event)"
-      />
-      <label for="showPassword">Show Password</label>
-    </div>
-
-    <!-- Actions -->
-    <div class="actions">
-      <button type="submit" class="btn primary">Login</button>
-      <button type="button" class="btn outline" (click)="goBack()">Back</button>
-    </div>
-  </form>
+    <div id="google-btn" class="google-btn-container"></div>
+  </div>
 </div>

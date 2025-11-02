@@ -1,13 +1,18 @@
-<div class="welcome-container">
-  <h1>Welcome to SR091928 Angular Application</h1>
+<div class="welcome-page">
+  <div class="card">
+    <img src="assets/images/sr-3.jpg" alt="sr-logo" class="logo" />
 
-  <div class="button-group">
-    <button mat-raised-button color="primary" (click)="navigateTo('login')">
-      Login
-    </button>
+    <h2 class="title">SR09192835</h2>
+    <p class="subtitle">Your Digital Gateway</p>
 
-    <button mat-stroked-button color="primary" (click)="navigateTo('signup')">
-      Signup
-    </button>
+    <h3 class="welcome">Welcome</h3>
+    <p class="description">
+      Access your world securely — fast, reliable, and simple.
+    </p>
+
+    <div class="buttons">
+      <button ibmButton="primary" (click)="goToLogin()">Login</button>
+      <button ibmButton="secondary" (click)="goToSignup()">Signup</button>
+    </div>
   </div>
 </div>

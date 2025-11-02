@@ -1,55 +1,24 @@
-/* ✅ Angular Material v18+ theme setup (M3) */
-
-@use '@angular/material' as mat;
-
-/* Define a color configuration */
-$my-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$red-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  typography: (
-    brand-family: 'Segoe UI, Roboto, sans-serif',
-    bold-weight: 600,
-  ),
-  density: (
-    scale: 0
-  )
-));
-
-/* Apply it globally */
-:root {
-  @include mat.all-component-themes($my-theme);
-}
-
-/* ✅ Custom global styles */
-
-html,
-body {
-  height: 100%;
+/* ---------- Global styles (no Carbon dependencies) ---------- */
+html, body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #d8f8d8;
-  color: black;
-  overflow-x: hidden;
-}
-
-.page {
-  padding-top: 80px; /* adjust for fixed header */
-  padding-bottom: 60px; /* adjust for fixed footer */
+  padding: 0;
+  height: 100%;
+  background-color: #f0e6ff; /* Lavender */
+  font-family: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  color: #2e2e2e;
 }
 
 button {
-  font-family: inherit;
   cursor: pointer;
+  border: none;
+  outline: none;
 }
 
-h2.title {
-  text-align: center;
-  font-weight: 600;
+a {
+  text-decoration: none;
+  color: #4b006e;
 }
 
-::ng-deep .cdk-overlay-container {
-  z-index: 2000 !important;
+a:hover {
+  text-decoration: underline;
 }

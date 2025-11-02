@@ -1,0 +1,72 @@
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+  background-color: #f1e5f8;
+}
+
+/* HEADER */
+.app-header {
+  flex-shrink: 0;
+  background-color: #4b006e;
+  color: white;
+  padding: 15px 40px;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+
+  .contact-btn {
+    background-color: white;
+    color: #4b006e;
+    font-weight: 600;
+    border-radius: 25px;
+    padding: 6px 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #f3e7ff;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+}
+
+/* MAIN CONTENT */
+.app-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-color: #f1e5f8;
+
+  /* Add internal scroll only if content really exceeds height */
+  & > * {
+    max-height: 100%;
+    overflow-y: auto;
+  }
+}
+
+/* FOOTER */
+.app-footer {
+  flex-shrink: 0;
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 0.9rem;
+}

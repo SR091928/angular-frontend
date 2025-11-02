@@ -69,13 +69,13 @@
       "defaultConfiguration": "development",
       "configurations": {
         "development": {
-          "browserTarget": "angular-frontend:build:development"
+          "buildTarget": "angular-frontend:build:development"
         },
         "staging": {
-          "browserTarget": "angular-frontend:build:staging"
+          "buildTarget": "angular-frontend:build:staging"
         },
         "production": {
-          "browserTarget": "angular-frontend:build:production"
+          "buildTarget": "angular-frontend:build:production"
         }
       }
     },
