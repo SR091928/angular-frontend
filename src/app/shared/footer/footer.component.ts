@@ -13,7 +13,7 @@ export class FooterComponent {
   constructor(private router: Router) {}
 
   shouldShowFooter(): boolean {
-    const hideFor = ['/welcome', '/login', '/signup', '/'];
+    const hideFor = ['/welcome', '/login', '/signup', '/forgot-password' , '/'];
     const url = this.router.url.split('?')[0];
     return !hideFor.includes(url);
   }

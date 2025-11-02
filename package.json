@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Angular frontend application with Jest and Cypress configured for testing.",
   "scripts": {
-    "local": "rm dist && npm ru build && npm run serve",
+    "local": "rimraf dist && npm run build && npm run serve",
     "build": "nx build angular-frontend",
     "serve": "nx serve angular-frontend --open",
     "build:staging": "rimraf dist && nx build angular-frontend --configuration staging",
@@ -20,6 +20,7 @@
     "npm": "10.*"
   },
   "dependencies": {
+    "@abacritt/angularx-social-login": "^1.2.5",
     "@angular/animations": "^18.2.14",
     "@angular/cdk": "^18.2.14",
     "@angular/common": "^18.2.0",
@@ -66,9 +67,12 @@
     "rimraf": "^6.0.1",
     "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.2"
+    "typescript": "^5.5.4"
   },
   "nx": {},
+  "overrides": {
+    "typescript": "5.5.4"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/SR091928/angular-frontend.git"

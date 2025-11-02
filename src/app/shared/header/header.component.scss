@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: maroon;
+  background-color: #4b006e;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -28,6 +28,6 @@
 
   &:hover {
     background-color: white;
-    color: maroon;
+    color: #4b006e;
   }
 }

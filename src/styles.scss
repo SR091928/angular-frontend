@@ -1,15 +1,24 @@
-/* Global styles and color variables */
-:root {
-  --primary-purple: #4b006e;
-  --text-primary: #2d2d2d;
-  --text-secondary: #555555;
-}
-
-html,
-body {
-  height: 100%;
+/* ---------- Global styles (no Carbon dependencies) ---------- */
+html, body {
   margin: 0;
   padding: 0;
-  background: #ede4f9; /* light purple global background */
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  height: 100%;
+  background-color: #f0e6ff; /* Lavender */
+  font-family: "IBM Plex Sans", "Segoe UI", Arial, sans-serif;
+  color: #2e2e2e;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: #4b006e;
+}
+
+a:hover {
+  text-decoration: underline;
 }

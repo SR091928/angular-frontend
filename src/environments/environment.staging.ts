@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  nodeUrl: 'https://shankar-nodejs-backend-eng.onrender.com',
-  pythonUrl: 'https://shankar-python-backend-eng.onrender.com'
+  apiUrl: 'https://shankar-nodejs-backend-eng.onrender.com',
+  googleClientId: '548767737425-0861m88rauo1nvrbbj9nh3dvrgaqs236.apps.googleusercontent.com'
 };

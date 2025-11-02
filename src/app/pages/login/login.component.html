@@ -1,66 +1,27 @@
-<div class="login-page">
-  <div class="login-card">
-    <h2 class="login-title">Login</h2>
+<div class="login-card">
+  <h2>Welcome Back</h2>
+  <p class="subtitle">Sign in to continue your journey</p>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <!-- USER ID -->
-      <div class="form-group">
-        <label for="userId">User ID*</label>
-        <input
-          ibmText
-          id="userId"
-          type="text"
-          placeholder="Email / Mobile / User ID"
-          formControlName="userId"
-          [ngClass]="{ 'invalid': isInvalid('userId') }"
-        />
-        <div class="error-msg" *ngIf="isInvalid('userId')">
-          User ID is required
-        </div>
-      </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <label>Email*</label>
+    <input type="email" formControlName="email" placeholder="Enter your email" />
 
-      <!-- PASSWORD -->
-      <div class="form-group">
-        <label for="password">Password*</label>
-        <div class="password-wrapper">
-          <input
-            ibmText
-            id="password"
-            [type]="showPassword ? 'text' : 'password'"
-            placeholder="Enter password"
-            formControlName="password"
-            [ngClass]="{ 'invalid': isInvalid('password') }"
-          />
-          <button
-            type="button"
-            class="icon-btn"
-            (click)="togglePasswordVisibility()"
-            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
-          >
-            <img
-              *ngIf="showPassword"
-              src="assets/icons/eye-off.svg"
-              alt="Hide password"
-            />
-            <img
-              *ngIf="!showPassword"
-              src="assets/icons/eye.svg"
-              alt="Show password"
-            />
-          </button>
-        </div>
-        <div class="error-msg" *ngIf="isInvalid('password')">
-          Password is required
-        </div>
-      </div>
+    <label>Password*</label>
+    <div class="password-field">
+      <input type="password" formControlName="password" placeholder="Enter password" />
+    </div>
 
-      <!-- BUTTONS -->
-      <div class="button-row">
-        <button ibmButton="primary" type="submit">Login</button>
-        <button ibmButton="secondary" type="button" (click)="goBack()">
-          Back
-        </button>
-      </div>
-    </form>
-  </div>
+    <div class="actions">
+      <a class="forgot" (click)="forgotPassword()">Forgot Password?</a>
+    </div>
+
+    <div class="button-row">
+      <button type="submit" class="btn primary">Login</button>
+      <button type="button" class="btn secondary" (click)="back()">Back</button>
+    </div>
+  </form>
+
+  <div class="divider-text"></div>
+
+  <div id="googleSignInButton" class="google-btn-container"></div>
 </div>

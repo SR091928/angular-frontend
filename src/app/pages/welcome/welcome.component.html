@@ -1,19 +1,18 @@
 <div class="welcome-page">
-  <div class="welcome-card">
-    <div class="brand-title">
-      <p class="sr-logo">sr-logo</p>
-      <h2>SR09192835</h2>
-      <p class="brand-subtext">Your Digital Gateway</p>
-    </div>
+  <div class="card">
+    <img src="assets/images/sr-3.jpg" alt="sr-logo" class="logo" />
 
-    <h1>Welcome</h1>
-    <p class="tagline">
+    <h2 class="title">SR09192835</h2>
+    <p class="subtitle">Your Digital Gateway</p>
+
+    <h3 class="welcome">Welcome</h3>
+    <p class="description">
       Access your world securely — fast, reliable, and simple.
     </p>
 
-    <div class="button-row">
-      <button class="btn-primary" routerLink="/login">Login</button>
-      <button class="btn-secondary" routerLink="/signup">Signup</button>
+    <div class="buttons">
+      <button ibmButton="primary" (click)="goToLogin()">Login</button>
+      <button ibmButton="secondary" (click)="goToSignup()">Signup</button>
     </div>
   </div>
 </div>

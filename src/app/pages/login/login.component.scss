@@ -1,89 +1,89 @@
-.login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 150px);
-  background-color: #e0f7df;
-}
-
 .login-card {
   background: #fff;
-  width: 420px;
-  padding: 2.5rem 3rem;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 0;
-}
-
-.login-title {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin: 60px auto;
+  padding: 40px;
   text-align: center;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
 }
 
-.form-group {
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
+h2 {
+  color: #4b006e;
+  margin-bottom: 5px;
 }
 
-input[ibmText] {
+.subtitle {
+  color: #6d4c9c;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  color: #4b006e;
+  margin-top: 15px;
+}
+
+input {
   width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
 }
 
-.invalid {
-  border: 1px solid #da1e28 !important;
-}
-
-.error-msg {
-  font-size: 0.8rem;
-  color: #da1e28;
-  margin-top: 0.3rem;
-}
-
-.password-wrapper {
+.password-field {
   position: relative;
-  display: flex;
-  align-items: center;
 }
 
-.password-wrapper input {
-  flex: 1;
+.actions {
+  text-align: right;
+  margin-top: 8px;
 }
 
-.icon-btn {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
+.forgot {
+  color: #4b006e;
+  font-size: 0.85rem;
   cursor: pointer;
-  padding: 0;
-}
-
-.icon-btn img {
-  width: 20px;
-  height: 20px;
-  filter: invert(40%);
 }
 
 .button-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 2rem;
+  margin-top: 25px;
 }
 
-button {
+.btn {
+  border: none;
+  padding: 10px 30px;
   border-radius: 25px;
   font-weight: 600;
-  padding: 0.6rem 1.8rem;
+  cursor: pointer;
 }
 
-button[ibmButton='primary'] {
-  background-color: #0072c3;
-  color: #fff;
+.btn.primary {
+  background-color: #4b006e;
+  color: white;
 }
 
-button[ibmButton='secondary'] {
-  background-color: #262626;
-  color: #fff;
+.btn.secondary {
+  border: 2px solid #4b006e;
+  background: transparent;
+  color: #4b006e;
+}
+
+.divider-text {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #4b006e;
+  font-weight: 500;
+}
+
+.google-btn-container {
+  display: flex;
+  justify-content: center;
 }

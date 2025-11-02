@@ -1,47 +1,46 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, AfterViewInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { ButtonModule } from 'carbon-components-angular/button';
-import { InputModule } from 'carbon-components-angular/input';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { GoogleAuthService } from '../../services/google-auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  form: FormGroup;
-  showPassword = false;
+export class LoginComponent implements AfterViewInit {
+  fb = inject(FormBuilder);
+  router = inject(Router);
+  googleAuth = inject(GoogleAuthService);
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.form = this.fb.group({
-      userId: ['', Validators.required],
-      password: ['', Validators.required],
-    });
+  loginForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+  });
+
+  ngAfterViewInit(): void {
+    this.googleAuth.initialize();
+    this.googleAuth.renderButton('googleSignInButton');
   }
 
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
-  }
-
-  isInvalid(field: string): boolean {
-    const control = this.form.get(field);
-    return !!control && control.invalid && (control.dirty || control.touched);
-  }
-
-  onSubmit(): void {
-    if (this.form.valid) {
-      console.log('✅ Login successful:', this.form.value);
-      // handle login logic here
-    } else {
-      this.form.markAllAsTouched();
+  onLogin(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
     }
+    console.log('Logging in with form values:', this.loginForm.value);
+    // Perform API call here...
+    this.router.navigate(['/home']);
   }
 
-  goBack(): void {
+  back(): void {
     this.router.navigate(['/welcome']);
+  }
+
+  forgotPassword(): void {
+    this.router.navigate(['/forgot-password']);
   }
 }
