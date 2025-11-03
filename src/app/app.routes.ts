@@ -22,8 +22,8 @@ export const routes: Routes = [
       { path: 'signup', component: SignupComponent },
       { path: 'home', component: HomeComponent },
       { path: 'contact-us', component: ContactUsComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent }
     ],
   },
   { path: '**', redirectTo: 'welcome' },
-  { path: 'forgot-password', component: ForgotPasswordComponent }
 ];

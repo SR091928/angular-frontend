@@ -1,141 +1,94 @@
-// src/app/services/google-auth.service.ts
-import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
-declare global {
-  interface Window { google: any; }
-}
 declare const google: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoogleAuthService {
-  private router = inject(Router);
+  private clientId = '548767737425-0861m88rauo1nvrbbj9nh3dvrgaqs236.apps.googleusercontent.com';
   user$ = new BehaviorSubject<{ name: string } | null>(null);
-  private loaded = false;
-  private initialized = false;
+
+  constructor(private router: Router, private zone: NgZone) {}
 
   /**
-   * Adds the GSI script to the page once.
+   * Initializes Google One Tap and Sign-In Button
    */
-  initialize(): void {
-    if (this.loaded) return;
-    this.loaded = true;
-
-    const id = 'google-identity-client';
-    if (document.getElementById(id)) { this.loaded = true; return; }
-
-    const script = document.createElement('script');
-    script.async = true;
-    script.defer = true;
-    script.src = 'https://accounts.google.com/gsi/client';
-    script.id = id;
-    script.onload = () => {
-      // We defer initialization until renderButton is called or the developer calls initializeSdk()
-      console.debug('Google GSI script loaded.');
-    };
-    document.head.appendChild(script);
-  }
-
-  /**
-   * Initializes google.accounts.id. Safe to call multiple times.
-   */
-  initSdkIfNeeded(): void {
-    if (this.initialized) return;
-    if (!window.google || !window.google.accounts || !window.google.accounts.id) {
-      // script not loaded yet — initialize() will add script tag
-      console.warn('Google GSI not ready yet. Call renderButton after script loads.');
+  initializeSignInButton(elementId: string) {
+    // Ensure the Google Identity script has loaded
+    if (typeof google === 'undefined' || !google.accounts) {
+      console.error('❌ Google Identity Services SDK not found.');
       return;
     }
 
-    window.google.accounts.id.initialize({
-      client_id: environment.googleClientId,
-      callback: (response: any) => this.handleCredentialResponse(response),
+    console.log('✅ Google GSI script loaded.');
+
+    // Initialize client
+    google.accounts.id.initialize({
+      client_id: this.clientId,
+      callback: (response: any) => this.handleCredentialResponse(response)
     });
 
-    this.initialized = true;
-    console.debug('Google GSI sdk initialized.');
-  }
-
-  /**
-   * Renders the GSI button into the container with id=containerId.
-   * If SDK/script isn't loaded yet it will try to initialize after onload.
-   */
-  renderButton(containerId: string): void {
-    this.initialize();
-
-    const tryRender = () => {
-      if (!window.google || !window.google.accounts || !window.google.accounts.id) {
-        // Not ready yet. Try again shortly (script might still be loading).
-        setTimeout(tryRender, 200);
-        return;
-      }
-
-      // initialize the sdk if not initialized
-      this.initSdkIfNeeded();
-
-      const el = document.getElementById(containerId);
-      if (!el) {
-        console.warn(`Google button container '${containerId}' not found.`);
-        return;
-      }
-
-      // Use the official renderButton API
-      window.google.accounts.id.renderButton(el, {
+    // Render button
+    google.accounts.id.renderButton(
+      document.getElementById(elementId),
+      {
         theme: 'outline',
         size: 'large',
         text: 'continue_with',
-        shape: 'pill',
-        width: 300
-      });
+        width: 300,
+        shape: 'pill'
+      }
+    );
 
-      // Optionally show the One Tap prompt (disabled by default)
-      // window.google.accounts.id.prompt();
-    };
-
-    tryRender();
+    console.log('✅ Google Sign-In button rendered.');
   }
 
   /**
-   * Handler for Google credential response. Decodes JWT, sets user and navigates to /home
+   * Handles credential from Google after login
    */
   private handleCredentialResponse(response: any) {
-    if (!response || !response.credential) {
-      console.error('No credential in Google response', response);
-      return;
-    }
-
-    const user = this.decodeJwt(response.credential);
-    if (!user) {
-      console.error('Invalid JWT from Google');
-      return;
-    }
-
-    const displayName = user.name || user.email?.split('@')[0] || 'User';
-    this.user$.next({ name: displayName });
-
-    // navigate to home
     try {
-      this.router.navigate(['/home']);
+      const decoded = this.decodeJwt(response.credential);
+      if (decoded && decoded.name) {
+        const displayName = decoded.name;
+        console.log('✅ Google user:', displayName);
+
+        // Update user observable
+        this.user$.next({ name: displayName });
+
+        // Navigate to home within Angular zone
+        this.zone.run(() => {
+          this.router.navigate(['/home']);
+        });
+      } else {
+        console.error('❌ Invalid JWT received from Google');
+      }
     } catch (err) {
-      console.warn('Router navigation failed:', err);
+      console.error('❌ Error parsing Google credential:', err);
     }
   }
 
-  private decodeJwt(token: string) {
+  /**
+   * Decode the JWT payload safely
+   */
+  private decodeJwt(token: string): any {
     try {
-      const base64 = token.split('.')[1];
-      const json = atob(base64.replace(/-/g, '+').replace(/_/g, '/'));
-      return JSON.parse(json);
-    } catch (err) {
+      const payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    } catch {
       return null;
     }
   }
 
-  clear(): void {
+  /**
+   * Logout user (clears local state)
+   */
+  logout() {
     this.user$.next(null);
+    google.accounts.id.disableAutoSelect();
+    this.router.navigate(['/welcome']);
   }
 }

@@ -1,80 +1,81 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GoogleAuthService } from '../../services/google-auth.service';
 
 @Component({
   selector: 'app-signup',
-  standalone: true,
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
+  standalone: true
 })
 export class SignupComponent implements OnInit {
-  form!: FormGroup;
+  signupForm!: FormGroup;
   showPassword = false;
   showConfirmPassword = false;
-  fromPage: string = 'welcome'; // default fallback
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private googleAuth: GoogleAuthService
+  ) { }
 
-  ngOnInit(): void {
-    // get source page from query params
-    this.route.queryParams.subscribe(params => {
-      if (params['from']) {
-        this.fromPage = params['from'];
-      }
+  ngOnInit() {
+    this.signupForm = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[\w.%+-]+@(gmail\.com|google\.com|yahoo\.com)$/)
+        ]
+      ],
+      password: [
+        '',
+        [Validators.required, Validators.pattern(/^[A-Za-z0-9_@#$%^&*()]+$/)]
+      ],
+      confirmPassword: ['', Validators.required]
     });
 
-    this.form = this.fb.group(
-      {
-        username: [
-          '',
-          [Validators.required, Validators.pattern(/^[\w.%+-]+@(gmail|google|yahoo)\.com$/)],
-        ],
-        password: [
-          '',
-          [Validators.required, Validators.pattern(/^[A-Za-z\d@$!%*?&]{8,16}$/)],
-        ],
-        confirmPassword: ['', Validators.required],
-      },
-      { validators: this.passwordMatchValidator }
+    // Initialize Google button
+    setTimeout(() => this.googleAuth.initializeSignInButton('googleSignUpButton'), 500);
+  }
+
+  get email() {
+    return this.signupForm.get('email');
+  }
+
+  get password() {
+    return this.signupForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.signupForm.get('confirmPassword');
+  }
+
+  get passwordMismatch() {
+    return (
+      this.password?.value &&
+      this.confirmPassword?.value &&
+      this.password?.value !== this.confirmPassword?.value
     );
   }
 
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password')?.value;
-    const confirm = form.get('confirmPassword')?.value;
-    return password === confirm ? null : { mismatch: true };
-  }
-
-  togglePassword() {
-    this.showPassword = !this.showPassword;
-  }
-
-  toggleConfirmPassword() {
-    this.showConfirmPassword = !this.showConfirmPassword;
+  togglePassword(type: 'password' | 'confirm') {
+    if (type === 'password') this.showPassword = !this.showPassword;
+    else this.showConfirmPassword = !this.showConfirmPassword;
   }
 
   onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    alert(`${this.form.value.username} signed up successfully! Redirecting to Login...`);
-    setTimeout(() => this.router.navigate(['/login']), 5000);
-  }
-
-  backToPrevious() {
-    if (this.fromPage === 'login') {
+    if (this.signupForm.valid && !this.passwordMismatch) {
+      console.log('✅ Signup successful:', this.signupForm.value);
       this.router.navigate(['/login']);
     } else {
-      this.router.navigate(['/welcome']);
+      this.signupForm.markAllAsTouched();
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/welcome']);
   }
 }

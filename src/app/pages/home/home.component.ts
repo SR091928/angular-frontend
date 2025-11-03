@@ -16,7 +16,7 @@ export class HomeComponent {
   router = inject(Router);
 
   logout() {
-    this.googleAuth.clear();
+    this.googleAuth.logout();
     this.router.navigate(['/welcome']);
   }
 }
