@@ -1,11 +1,47 @@
+/* ==============================
+   Footer Base Layout
+   ============================== */
 .app-footer {
-  background-color: #000;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent; /* ✅ seamless blend with app gradient */
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 50;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  border: none;
+  box-shadow: none;
+}
+
+/* Maintain reserved space even when hidden */
+.app-footer.hidden {
+  visibility: hidden;
+}
+
+/* Inner content */
+.footer-inner {
   font-size: 13px;
+  font-weight: 500;
+  opacity: 0.9;
+  color: #3b0764;
+  letter-spacing: 0.2px;
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ==============================
+   Responsive Adjustments
+   ============================== */
+@media (max-width: 768px) {
+  .footer-inner {
+    font-size: 12px;
+    opacity: 1;
+    padding: 0 12px;
+  }
 }

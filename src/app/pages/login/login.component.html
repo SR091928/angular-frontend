@@ -11,13 +11,14 @@
           type="text"
           formControlName="username"
           placeholder="Enter your email or username"
+          autocomplete="user-name"
         />
         <small class="error" *ngIf="username?.touched && username?.invalid">
           <ng-container *ngIf="username?.errors?.['required']">
             Username or Email is required.
           </ng-container>
           <ng-container *ngIf="username?.errors?.['pattern']">
-            {{username_error}}
+            {{ username_error }}
           </ng-container>
         </small>
       </div>
@@ -30,6 +31,7 @@
             [type]="showPassword ? 'text' : 'password'"
             formControlName="password"
             placeholder="Enter password"
+            autocomplete="current-password"
           />
           <button
             type="button"
@@ -57,26 +59,36 @@
           </ng-container>
           <ng-container *ngIf="password?.errors?.['pattern']">
             Password can contain letters, numbers, and special chars
-            (A-Z, a-z, 0-9, _&#64;#$%^&amp;*()).
+            (A-Z, a-z, 0-9, _&#64;#$%^&*()).
           </ng-container>
         </small>
       </div>
 
+      <!-- Forgot password aligned to right -->
       <div class="forgot-password">
         <a (click)="forgotPassword()">Forgot Password?</a>
       </div>
 
+      <!-- Buttons row: Login (left) and Back (right) -->
       <div class="form-actions">
         <button
           type="submit"
           class="btn primary"
-          [disabled]="loginForm.invalid"
         >
           Login
         </button>
-        <button type="button" class="btn outline" (click)="goBack()">Back</button>
+
+        <button type="button" class="btn outline" (click)="goBack()">
+          Back
+        </button>
       </div>
     </form>
+
+    <!-- Centered signup link like "Or" -->
+    <div class="signup-link">
+      <span>Don't have an account?</span>
+      <a routerLink="/signup">Sign up</a>
+    </div>
 
     <div class="divider">
       <span>Or</span>

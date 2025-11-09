@@ -1,140 +1,295 @@
+/* ============================
+   Signup Page Layout
+   ============================ */
 .app-content {
-  flex: 1;
+  min-height: calc(100vh - 120px);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f3e8ff;
-  min-height: calc(100vh - 120px);
+  background: transparent;
+  padding: 40px 20px;
+  overflow: hidden;
 }
 
+/* ============================
+   Auth Card
+   ============================ */
 .auth-card {
-  background: #fff;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 16px;
-  padding: 40px 50px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   width: 100%;
+  max-width: 580px;
+  padding: 30px 36px 0;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  position: relative;
 }
 
+/* ============================
+   Titles
+   ============================ */
 .auth-title {
   color: #4b0082;
   font-weight: 700;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .auth-subtitle {
   color: #666;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
+/* ============================
+   Scrollable Form (only form scrolls)
+   ============================ */
+form {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 420px);
+  padding-inline-end: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(75, 0, 130, 0.25) transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(75, 0, 130, 0.25);
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ============================
+   Form Groups
+   ============================ */
 .form-group {
+  margin-bottom: 18px;
   text-align: left;
-  margin-bottom: 20px;
 
   label {
     font-weight: 600;
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    color: #222;
+    font-size: 14px;
   }
 
-  input {
+  input,
+  select,
+  textarea {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
+    border: 1px solid #e0d7ee;
     border-radius: 8px;
     outline: none;
-    transition: border 0.2s;
+    background: #fff;
+    transition: border 0.18s, box-shadow 0.18s;
+    padding: 10px 14px;
+    height: 42px;
+    box-sizing: border-box;
 
     &:focus {
       border-color: #4b0082;
+      box-shadow: 0 4px 14px rgba(75, 0, 130, 0.06);
     }
+  }
+
+  input[type="date"] {
+    padding-right: 38px;
+  }
+
+  textarea {
+    min-height: 70px;
+    resize: vertical;
   }
 
   .error {
     font-size: 12px;
-    color: red;
+    color: #d9534f;
+    margin-top: 6px;
   }
 }
 
+/* ============================
+   Password Field
+   ============================ */
 .password-field {
   position: relative;
 
   .password-wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #e0d7ee;
+    border-radius: 8px;
+    background: #fff;
+    transition: border 0.18s, box-shadow 0.18s;
+
+    &:focus-within {
+      border-color: #4b0082;
+      box-shadow: 0 4px 14px rgba(75, 0, 130, 0.06);
+    }
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14px;
+    padding: 10px 48px 10px 14px;
+    height: 42px;
   }
 
   .eye-btn {
     position: absolute;
-    right: 8px;
-    top: 8px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: rgba(75, 0, 130, 0.08);
+    }
+
+    .eye-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.9;
+    }
   }
+}
+
+/* ============================
+   Form Row (Code + Mobile)
+   ============================ */
+.form-row {
+  display: flex;
+  gap: 10px;
+
+  .form-group {
+    flex: 1;
+  }
+
+  .form-group.code {
+    flex: 0.4;
+  }
+
+  .form-group.phone {
+    flex: 1.6;
+  }
+}
+
+/* ============================
+   Fixed Action Area
+   ============================ */
+.fixed-footer {
+  position: sticky;
+  bottom: 0;
+  backdrop-filter: blur(8px);
+  padding-top: 12px;
+  // padding-bottom: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  margin-top: auto;
 }
 
 .form-actions {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  margin-top: 20px;
 }
 
 .btn {
   flex: 1;
   padding: 10px 0;
-  border-radius: 20px;
-  font-weight: 600;
+  border-radius: 22px;
+  font-weight: 700;
   cursor: pointer;
   border: 2px solid #4b0082;
-  transition: all 0.2s;
+  transition: all 0.12s ease;
+}
 
-  &.primary {
-    background: #4b0082;
-    color: #fff;
-  }
-
-  &.outline {
-    background: transparent;
-    color: #4b0082;
-  }
+.btn.primary {
+  background: linear-gradient(180deg, #6f5bb4, #4b3aa3);
+  color: #fff;
+  border-color: transparent;
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.65;
     cursor: not-allowed;
   }
 }
 
+.btn.outline {
+  background: transparent;
+  color: #4b0082;
+  border: 1.6px solid #4b0082;
+}
+
+/* ============================
+   Divider & Google Button
+   ============================ */
 .divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 25px 0;
+  margin: 20px 0;
   color: #999;
   font-size: 14px;
   position: relative;
 
   span {
-    background-color: #fff;
+    background-color: transparent;
     padding: 0 12px;
-    position: relative;
     z-index: 2;
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 1px;
-    background: #ccc;
+    background: #e8e0f2;
     top: 50%;
-    z-index: 1;
   }
 }
 
 .google-btn {
   display: flex;
   justify-content: center;
+  margin-bottom: 6px;
+}
+
+/* ============================
+   Responsive Adjustments
+   ============================ */
+@media (max-width: 600px) {
+  .auth-card {
+    width: 90%;
+    padding: 28px 20px 0;
+  }
+
+  form {
+    max-height: calc(100vh - 380px);
+  }
 }

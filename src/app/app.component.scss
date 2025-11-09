@@ -1,8 +1,107 @@
-/* Keep content between header and footer without overflow */
-.app-main {
-  min-height: calc(100vh - 105px); /* header 60 + footer 45 */
-  background-color: #d8f8d8;
+:host,
+:host * {
+  box-sizing: border-box;
+}
+
+/* ============================
+   Global Layout & Theme
+   ============================ */
+:host {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(
+    145deg,
+    #f5e6ff 0%,
+    #e9f0ff 45%,
+    #d6e2ff 100%
+  );
+  color: #2b2b2b;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size: var(--font-base, 14px);
+  line-height: 1.5;
+}
+
+/* ============================
+   Font System
+   ============================ */
+:root {
+  --font-base: 14px;
+  --font-small: 13px;
+  --font-title: 1.4rem;
+  --font-subtitle: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --font-base: 13px;
+    --font-small: 12px;
+    --font-title: 1.2rem;
+    --font-subtitle: 1rem;
+  }
+}
+
+/* ============================
+   Header / Footer
+   ============================ */
+app-header {
+  height: 64px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+app-footer {
+  height: 60px;
+  flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+app-header.hidden,
+app-footer.hidden {
+  visibility: hidden;
+}
+
+/* ============================
+   Main Scrollable Area
+   ============================ */
+.app-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.page-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 16px 48px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar */
+.page-container::-webkit-scrollbar {
+  width: 8px;
+}
+.page-container::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Padding */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 16px 12px 60px;
+  }
 }

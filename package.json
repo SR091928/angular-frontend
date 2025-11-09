@@ -4,7 +4,8 @@
   "description": "Angular frontend application with Jest and Cypress configured for testing.",
   "private": true,
   "scripts": {
-    "local": "rimraf dist && npm run build && npm run serve",
+    "clean": "rimraf dist",
+    "local": "npm run clean && npm run build && npm run serve",
     "build": "nx build angular-frontend",
     "serve": "nx serve angular-frontend --open",
     "build:staging": "rimraf dist && nx build angular-frontend --configuration=staging",
@@ -15,8 +16,7 @@
     "lint:fix": "nx lint angular-frontend --fix",
     "format": "prettier --write \"src/**/*.{ts,html,scss,json,md}\"",
     "test": "nx test angular-frontend",
-    "e2e": "nx e2e angular-frontend",
-    "prepare": "husky"
+    "e2e": "nx e2e angular-frontend"
   },
   "dependencies": {
     "@abacritt/angularx-social-login": "^1.2.5",
@@ -54,11 +54,9 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "husky": "^9.1.7",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.1.2",
     "jest-preset-angular": "^15.0.0",
-    "lint-staged": "^16.2.6",
     "nx": "21.5.3",
     "prettier": "^3.3.2",
     "rimraf": "^6.0.1",
@@ -77,11 +75,5 @@
     "type": "git",
     "url": "https://github.com/SR091928/angular-frontend.git"
   },
-  "nx": {},
-  "lint-staged": {
-    "*.{ts,html,scss}": [
-      "prettier --write",
-      "nx lint angular-frontend --fix"
-    ]
-  }
+  "nx": {}
 }

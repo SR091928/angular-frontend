@@ -85,14 +85,12 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/unit-test-reports"],
+      "outputs": ["{workspaceRoot}/coverage/unit"],
       "options": {
         "jestConfig": "jest.config.ts",
         "setupFilesAfterEnv": ["<rootDir>/src/test-setup.ts"],
         "passWithNoTests": true,
-        "coverage": true,
-        "coverageReporters": ["html", "text", "lcov"],
-        "coverageDirectory": "coverage/unit-test-reports"
+        "coverage": true
       }
     },
     "lint": {

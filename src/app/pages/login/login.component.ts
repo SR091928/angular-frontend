@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { GoogleAuthService } from '../../services/google-auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, CommonModule, RouterLink]
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -35,8 +36,12 @@ export class LoginComponent implements OnInit {
       ],
       password: [
         '',
-        [Validators.required, Validators.pattern(/^[A-Za-z0-9_@#$%^&*()]+$/)]
+        [
+          Validators.required,
+          Validators.pattern(/^[A-Za-z0-9_@#$%^&*()]{8,}$/)
+        ]
       ]
+
     });
 
     setTimeout(() => this.googleAuth.initializeSignInButton('googleSignInButton'), 500);

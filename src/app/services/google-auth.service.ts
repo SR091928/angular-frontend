@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 declare const google: any;
 
@@ -11,7 +12,11 @@ export class GoogleAuthService {
   private clientId = '548767737425-0861m88rauo1nvrbbj9nh3dvrgaqs236.apps.googleusercontent.com';
   user$ = new BehaviorSubject<{ name: string } | null>(null);
 
-  constructor(private router: Router, private zone: NgZone) {}
+  constructor(
+    private router: Router,
+    private zone: NgZone,
+    private socialAuth: SocialAuthService
+  ) { }
 
   /**
    * Initializes Google One Tap and Sign-In Button
@@ -22,8 +27,6 @@ export class GoogleAuthService {
       console.error('❌ Google Identity Services SDK not found.');
       return;
     }
-
-    console.log('✅ Google GSI script loaded.');
 
     // Initialize client
     google.accounts.id.initialize({
@@ -43,7 +46,6 @@ export class GoogleAuthService {
       }
     );
 
-    console.log('✅ Google Sign-In button rendered.');
   }
 
   /**
@@ -54,7 +56,6 @@ export class GoogleAuthService {
       const decoded = this.decodeJwt(response.credential);
       if (decoded && decoded.name) {
         const displayName = decoded.name;
-        console.log('✅ Google user:', displayName);
 
         // Update user observable
         this.user$.next({ name: displayName });
@@ -87,8 +88,13 @@ export class GoogleAuthService {
    * Logout user (clears local state)
    */
   logout() {
-    this.user$.next(null);
-    google.accounts.id.disableAutoSelect();
-    this.router.navigate(['/welcome']);
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // 2️⃣ Sign out from Google (SDK + session)
+    this.socialAuth.signOut(true).then(() => {
+      this.user$.next(null);
+      google.accounts.id.disableAutoSelect();
+    });
   }
 }

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { GoogleAuthService } from '../../services/google-auth.service';
 
 @Component({
   selector: 'app-signup',
+  standalone: true,
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
-  imports: [ReactiveFormsModule],
-  standalone: true
+  imports: [CommonModule, ReactiveFormsModule]
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
@@ -21,61 +22,77 @@ export class SignupComponent implements OnInit {
     private googleAuth: GoogleAuthService
   ) { }
 
-  ngOnInit() {
-    this.signupForm = this.fb.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(/^[\w.%+-]+@(gmail\.com|google\.com|yahoo\.com)$/)
-        ]
-      ],
-      password: [
-        '',
-        [Validators.required, Validators.pattern(/^[A-Za-z0-9_@#$%^&*()]+$/)]
-      ],
-      confirmPassword: ['', Validators.required]
-    });
+  get firstName() { return this.signupForm.get('firstName'); }
+  get lastName() { return this.signupForm.get('lastName'); }
+  get username() { return this.signupForm.get('username'); }
+  get password() { return this.signupForm.get('password'); }
+  get confirmPassword() { return this.signupForm.get('confirmPassword'); }
+  get dob() { return this.signupForm.get('dob'); }
+  get countryCode() { return this.signupForm.get('countryCode'); }
+  get mobile() { return this.signupForm.get('mobile'); }
+  get email() { return this.signupForm.get('email'); }
+  get address() { return this.signupForm.get('address'); }
 
-    // Initialize Google button
-    setTimeout(() => this.googleAuth.initializeSignInButton('googleSignUpButton'), 500);
-  }
-
-  get email() {
-    return this.signupForm.get('email');
-  }
-
-  get password() {
-    return this.signupForm.get('password');
-  }
-
-  get confirmPassword() {
-    return this.signupForm.get('confirmPassword');
-  }
-
-  get passwordMismatch() {
-    return (
-      this.password?.value &&
-      this.confirmPassword?.value &&
-      this.password?.value !== this.confirmPassword?.value
+  ngOnInit(): void {
+    this.signupForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        username: ['', [Validators.required, Validators.minLength(3)]],
+        password: [
+          '',
+          [
+            Validators.required,
+            // ✅ 8+ chars, allowed characters only
+            Validators.pattern(/^[A-Za-z0-9_@#$%^&*()]{8,}$/)
+          ]
+        ],
+        confirmPassword: ['', Validators.required],
+        dob: ['', Validators.required],
+        countryCode: ['+91', Validators.required],
+        mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+        email: ['', [Validators.email]],
+        address: ['']
+      },
+      { validators: this.passwordMatchValidator } // ✅ add custom validator
     );
+
+    // Initialize Google Sign-In button
+    setTimeout(() => this.googleAuth.initializeSignInButton('googleSignInButton'), 500);
   }
 
-  togglePassword(type: 'password' | 'confirm') {
-    if (type === 'password') this.showPassword = !this.showPassword;
-    else this.showConfirmPassword = !this.showConfirmPassword;
+  // ✅ Password match validation
+  passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    if (password && confirmPassword && password !== confirmPassword) {
+      control.get('confirmPassword')?.setErrors({ mismatch: true });
+      return { mismatch: true };
+    }
+    return null;
   }
 
-  onSubmit() {
-    if (this.signupForm.valid && !this.passwordMismatch) {
-      console.log('✅ Signup successful:', this.signupForm.value);
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPassword(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
+  // ✅ Form submission
+  onSubmit(): void {
+    if (this.signupForm.valid) {
+      console.log('✅ Signup form data:', this.signupForm.value);
+      // You can call your backend API here.
       this.router.navigate(['/login']);
     } else {
       this.signupForm.markAllAsTouched();
     }
   }
 
-  goBack() {
+  // ✅ Back to welcome page
+  goBack(): void {
     this.router.navigate(['/welcome']);
   }
 }
