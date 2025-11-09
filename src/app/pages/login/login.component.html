@@ -1,41 +1,99 @@
-<div class="login-container">
-  <div class="login-card">
-    <h2 class="title">Welcome Back</h2>
-    <p class="subtitle">Sign in to continue your journey</p>
+<div class="app-content">
+  <div class="auth-card">
+    <h2 class="auth-title">Welcome Back</h2>
+    <p class="auth-subtitle">Sign in to continue your journey</p>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="login-form">
-      <label for="email">Email*</label>
-      <input
-        id="email"
-        type="email"
-        formControlName="email"
-        placeholder="Enter your email"
-        autocomplete="username"
-      />
-
-      <label for="password">Password*</label>
-      <input
-        id="password"
-        type="password"
-        formControlName="password"
-        placeholder="Enter password"
-        autocomplete="current-password"
-      />
-
-      <div class="forgot-row">
-        <a class="forgot-link">Forgot Password?</a>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Email / Username -->
+      <div class="form-group">
+        <label>Email / Username*</label>
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Enter your email or username"
+          autocomplete="user-name"
+        />
+        <small class="error" *ngIf="username?.touched && username?.invalid">
+          <ng-container *ngIf="username?.errors?.['required']">
+            Username or Email is required.
+          </ng-container>
+          <ng-container *ngIf="username?.errors?.['pattern']">
+            {{ username_error }}
+          </ng-container>
+        </small>
       </div>
 
-      <div class="button-row">
-        <button type="submit" class="btn btn-primary">Login</button>
-        <button type="button" class="btn btn-outline" (click)="onBack()">Back</button>
+      <!-- Password -->
+      <div class="form-group password-field">
+        <label>Password*</label>
+        <div class="password-wrapper">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Enter password"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="eye-btn"
+            (click)="togglePassword()"
+            aria-label="Toggle password visibility"
+          >
+            <img
+              *ngIf="!showPassword"
+              src="assets/icons/eye-show.svg"
+              alt="Show password"
+              class="eye-icon"
+            />
+            <img
+              *ngIf="showPassword"
+              src="assets/icons/eye-hide.svg"
+              alt="Hide password"
+              class="eye-icon"
+            />
+          </button>
+        </div>
+        <small class="error" *ngIf="password?.touched && password?.invalid">
+          <ng-container *ngIf="password?.errors?.['required']">
+            Password is required.
+          </ng-container>
+          <ng-container *ngIf="password?.errors?.['pattern']">
+            Password can contain letters, numbers, and special chars
+            (A-Z, a-z, 0-9, _&#64;#$%^&*()).
+          </ng-container>
+        </small>
+      </div>
+
+      <!-- Forgot password aligned to right -->
+      <div class="forgot-password">
+        <a (click)="forgotPassword()">Forgot Password?</a>
+      </div>
+
+      <!-- Buttons row: Login (left) and Back (right) -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn primary"
+        >
+          Login
+        </button>
+
+        <button type="button" class="btn outline" (click)="goBack()">
+          Back
+        </button>
       </div>
     </form>
+
+    <!-- Centered signup link like "Or" -->
+    <div class="signup-link">
+      <span>Don't have an account?</span>
+      <a routerLink="/signup">Sign up</a>
+    </div>
 
     <div class="divider">
       <span>Or</span>
     </div>
 
-    <div id="google-btn" class="google-btn-container"></div>
+    <div id="googleSignInButton" class="google-btn"></div>
   </div>
 </div>

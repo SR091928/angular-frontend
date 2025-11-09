@@ -1,5 +1,22 @@
-<header *ngIf="shouldShowHeader()" class="app-header">
-  <div class="header-content">
-    <a routerLink="/contact-us" class="contact-link">Contact Us</a>
+<header class="app-header" [class.hidden]="!visible">
+  <div class="header-inner">
+
+    <!-- Left: Logo area (shown/hidden dynamically, space preserved) -->
+    <div class="logo-slot">
+      <div
+        class="logo-wrapper"
+        *ngIf="!hideLogo"
+        (click)="navigateToHome()"
+      >
+        <img src="assets/images/sr-3.png" alt="SR Logo" class="logo-img" />
+        <div class="tooltip">Click to logout and return to welcome</div>
+      </div>
+    </div>
+
+    <!-- Right: Contact Us (always visible, stays in position) -->
+    <div class="nav-actions">
+      <button class="btn ghost">Contact Us</button>
+    </div>
+
   </div>
 </header>

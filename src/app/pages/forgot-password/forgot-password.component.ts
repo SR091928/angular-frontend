@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,7 +14,9 @@ export class ForgotPasswordComponent {
   form: FormGroup;
   successMessage = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  constructor() {
     this.form = this.fb.group({
       email: [
         '',

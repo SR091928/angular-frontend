@@ -1,0 +1,18 @@
+<!-- Root Application Layout -->
+<div class="app-wrapper">
+  <!-- Header: visibility controlled by showHeader, logo visibility by hideLogo -->
+  <app-header
+    [visible]="showHeader"
+    [hideLogo]="hideLogo">
+  </app-header>
+
+  <!-- Main content area: scrollable region -->
+  <main class="app-main">
+    <section class="page-container" id="scrollable-content">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+
+  <!-- Footer: visibility controlled by showFooter -->
+  <app-footer [visible]="showFooter"></app-footer>
+</div>

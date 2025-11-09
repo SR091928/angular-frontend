@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -10,11 +9,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  constructor(private router: Router) {}
-
-  shouldShowFooter(): boolean {
-    const hideFor = ['/welcome', '/login', '/signup', '/forgot-password' , '/'];
-    const url = this.router.url.split('?')[0];
-    return !hideFor.includes(url);
-  }
+  @Input() visible = true;
 }

@@ -1,21 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+
+declare const google: any; // For Google Identity logout handling
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(public router: Router) {}
+  @Input() visible: boolean = true;
+  @Input() hideLogo: boolean = false;
 
-  shouldShowHeader(): boolean {
-    // Hide header on specific routes
-    const hideFor = ['/welcome', '/login', '/signup', '/']; // add more if needed
-    const url = this.router.url.split('?')[0];
-    return !hideFor.includes(url);
+  private router = inject(Router);
+  constructor() {}
+
+  async navigateToHome() {
+    try {
+      // Clear app sessions
+      localStorage.clear();
+      sessionStorage.clear();
+
+      // Disable Google auto sign-in (new API)
+      if (typeof google !== 'undefined' && google.accounts?.id) {
+        google.accounts.id.disableAutoSelect();
+      }
+
+      // Handle legacy gapi sign-out (if used)
+      if ((window as any).gapi?.auth2) {
+        const auth2 = (window as any).gapi.auth2.getAuthInstance();
+        if (auth2) {
+          await auth2.signOut();
+          await auth2.disconnect();
+        }
+      }
+
+      console.log('✅ Header logout: sessions cleared');
+    } catch (error) {
+      console.warn('⚠️ Header logout error:', error);
+    }
+
+    // Navigate to welcome page
+    this.router.navigate(['/welcome']);
   }
 }

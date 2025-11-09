@@ -1,33 +1,96 @@
 .app-header {
+  height: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  background: transparent; /* blends with app gradient */
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  z-index: 100;
+  transition: opacity 0.3s ease;
+}
+
+.app-header.hidden {
+  visibility: hidden;
+}
+
+.header-inner {
   width: 100%;
-  height: 60px;
-  background-color: #4b006e;
+  max-width: 1200px;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
-  padding-right: 24px;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
 }
 
-.header-content {
-  padding-right: 24px;
+/* Left logo slot always occupies space */
+.logo-slot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 48px; /* fixed width to balance layout even if hidden */
 }
 
-.contact-link {
-  color: white;
-  text-decoration: none;
+/* Actual logo */
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.logo-wrapper:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+.logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  bottom: -46px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b0764;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.logo-wrapper:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Contact Us button */
+.nav-actions .btn.ghost {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.3);
+  color: #3b0764;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
   font-weight: 500;
-  border: 1px solid white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+}
 
-  &:hover {
-    background-color: white;
-    color: #4b006e;
-  }
+.nav-actions .btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
 }
