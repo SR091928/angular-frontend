@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +15,8 @@ export class HeaderComponent {
   @Input() visible: boolean = true;
   @Input() hideLogo: boolean = false;
 
-  constructor(private router: Router) {}
+  private router = inject(Router);
+  constructor() {}
 
   async navigateToHome() {
     try {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'carbon-components-angular';
@@ -11,15 +11,14 @@ import { ButtonModule } from 'carbon-components-angular';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent {
-  constructor(private router: Router) {}
+  private router = inject(Router);
+  constructor() {}
 
   goToLogin(): void {
-    console.log('Navigating to login...');
     this.router.navigate(['/login']);
   }
 
   goToSignup(): void {
-    console.log('Navigating to signup...');
     this.router.navigate(['/signup']);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -16,11 +16,10 @@ export class SignupComponent implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private googleAuth: GoogleAuthService
-  ) { }
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private googleAuth = inject(GoogleAuthService);
+  constructor() { }
 
   get firstName() { return this.signupForm.get('firstName'); }
   get lastName() { return this.signupForm.get('lastName'); }

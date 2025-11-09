@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
@@ -21,7 +21,8 @@ export class AppComponent {
   private debounceTimer: any = null;
   private initialLoad = true;
 
-  constructor(private router: Router) {
+  private router = inject(Router);
+  constructor() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.urlAfterRedirects;

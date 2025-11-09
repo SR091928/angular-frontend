@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -21,7 +21,9 @@ export class ContactUsComponent {
   // email: letters, numbers, @, .
   emailPattern = '^[A-Za-z0-9@.]+$';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  constructor() {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern(this.namePattern)]],
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],

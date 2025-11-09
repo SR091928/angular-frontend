@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { GoogleAuthService } from '../../services/google-auth.service';
@@ -16,11 +16,10 @@ export class LoginComponent implements OnInit {
   showPassword = false;
   username_error: string = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private googleAuth: GoogleAuthService
-  ) { }
+  private fb = inject(FormBuilder);
+  private router = inject(Router);
+  private googleAuth = inject(GoogleAuthService);
+  constructor() { }
 
   ngOnInit() {
     this.username_error = 'Invalid format. Allowed: A-Z, a-z, 0-9, _ or email ending with @gmail.com, @google.com, or @yahoo.com.';

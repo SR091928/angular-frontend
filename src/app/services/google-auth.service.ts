@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
@@ -12,11 +12,10 @@ export class GoogleAuthService {
   private clientId = '548767737425-0861m88rauo1nvrbbj9nh3dvrgaqs236.apps.googleusercontent.com';
   user$ = new BehaviorSubject<{ name: string } | null>(null);
 
-  constructor(
-    private router: Router,
-    private zone: NgZone,
-    private socialAuth: SocialAuthService
-  ) { }
+  private router = inject(Router);
+  private zone = inject(NgZone);
+  private socialAuth = inject(SocialAuthService);
+  constructor() { }
 
   /**
    * Initializes Google One Tap and Sign-In Button
